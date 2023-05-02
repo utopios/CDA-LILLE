@@ -98,7 +98,20 @@ public class Student {
         return rowNb > 0;
     }
 
-    public List<Student> getAll() throws SQLException {
+    public static Student getById(int id) throws SQLException {
+        Student student = null;
+        request = "SELECT * FROM student where id = ?";
+        connection = new DataBaseManager().getConnection();
+        statement = connection.prepareStatement(request);
+        statement.setInt(1, id);
+        ResultSet resultSet = statement.executeQuery();
+        if (resultSet.next()) {
+            student = new Student(resultSet.getInt("id"),resultSet.getString("first_name"), resultSet.getString("last_name"), resultSet.getString("date_degree"), resultSet.getInt("class_number"));
+        }
+        return student;
+    }
+
+    public static List<Student> getAll() throws SQLException {
         List<Student> result = new ArrayList<>();
         request = "SELECT * FROM student";
         connection = new DataBaseManager().getConnection();
@@ -111,7 +124,7 @@ public class Student {
         return result;
     }
 
-    public List<Student> getByClass(int classNumber) throws SQLException {
+    public static List<Student> getByClass(int classNumber) throws SQLException {
         List<Student> result = new ArrayList<>();
         request = "SELECT * FROM student where class_number = ?";
         connection = new DataBaseManager().getConnection();
@@ -123,5 +136,16 @@ public class Student {
             result.add(s);
         }
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", dateDegree='" + dateDegree + '\'' +
+                ", classNumber=" + classNumber +
+                '}';
     }
 }
