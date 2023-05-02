@@ -53,7 +53,7 @@ public class Main {
 //
 //        }
 
-        //Correction ex1
+        //Correction exercice 1
         new IHM().start();
     }
 }
