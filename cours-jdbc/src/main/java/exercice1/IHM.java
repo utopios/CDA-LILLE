@@ -1,6 +1,9 @@
 package exercice1;
 
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 
 public class IHM {
@@ -39,14 +42,21 @@ public class IHM {
 
     }
 
-    private void addStudentAction() {
+    private void addStudentAction()  {
         System.out.println("**** Ajouter un étudiant ****");
         System.out.print("Merci de saisir le nom : ");
         String lastName = scanner.nextLine();
         System.out.print("Merci de saisir le prénom : ");
         String firstName = scanner.nextLine();
         System.out.print("Merci de saisir la date du diplome : ");
-        String dateDegree = scanner.nextLine();
+        String dateDegreeString = scanner.nextLine();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        Date dateDegree = null;
+        try {
+            dateDegree = dateFormat.parse(dateDegreeString);
+        } catch (ParseException e) {
+            dateDegree = new Date("01/01/2001");
+        }
         System.out.print("Merci de saisir la classe : ");
         int classNumber = scanner.nextInt();
         scanner.nextLine();

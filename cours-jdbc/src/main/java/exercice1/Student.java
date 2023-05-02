@@ -4,13 +4,14 @@ import org.example.util.DataBaseManager;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Student {
     private int id;
     private String firstName;
     private String lastName;
-    private String dateDegree;
+    private Date dateDegree;
     private int classNumber;
 
     private static String request;
@@ -21,14 +22,14 @@ public class Student {
 
 
 
-    public Student(String firstName, String lastName, String dateDegree, int classNumber) {
+    public Student(String firstName, String lastName, Date dateDegree, int classNumber) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateDegree = dateDegree;
         this.classNumber = classNumber;
     }
 
-    public Student(int id, String firstName, String lastName, String dateDegree, int classNumber) {
+    public Student(int id, String firstName, String lastName, Date dateDegree, int classNumber) {
         this(firstName, lastName, dateDegree, classNumber);
         this.id = id;
 
@@ -58,11 +59,11 @@ public class Student {
         this.lastName = lastName;
     }
 
-    public String getDateDegree() {
+    public Date getDateDegree() {
         return dateDegree;
     }
 
-    public void setDateDegree(String dateDegree) {
+    public void setDateDegree(Date dateDegree) {
         this.dateDegree = dateDegree;
     }
 
@@ -80,7 +81,7 @@ public class Student {
         statement = connection.prepareStatement(request, Statement.RETURN_GENERATED_KEYS);
         statement.setString(1, getFirstName());
         statement.setString(2, getLastName());
-        statement.setString(3, getDateDegree());
+        statement.setDate(3, new java.sql.Date(getDateDegree().getTime()));
         statement.setInt(4, getClassNumber());
         int rowNb =statement.executeUpdate();
         ResultSet resultSet = statement.getGeneratedKeys();
@@ -107,7 +108,7 @@ public class Student {
         statement.setInt(1, id);
         ResultSet resultSet = statement.executeQuery();
         if (resultSet.next()) {
-            student = new Student(resultSet.getInt("id"),resultSet.getString("first_name"), resultSet.getString("last_name"), resultSet.getString("date_degree"), resultSet.getInt("class_number"));
+            student = new Student(resultSet.getInt("id"),resultSet.getString("first_name"), resultSet.getString("last_name"), resultSet.getDate("date_degree"), resultSet.getInt("class_number"));
         }
         return student;
     }
@@ -119,7 +120,7 @@ public class Student {
         statement = connection.prepareStatement(request);
         ResultSet resultSet = statement.executeQuery();
         while (resultSet.next()) {
-            Student s = new Student(resultSet.getInt("id"),resultSet.getString("first_name"), resultSet.getString("last_name"), resultSet.getString("date_degree"), resultSet.getInt("class_number"));
+            Student s = new Student(resultSet.getInt("id"),resultSet.getString("first_name"), resultSet.getString("last_name"), resultSet.getDate("date_degree"), resultSet.getInt("class_number"));
             result.add(s);
         }
         return result;
@@ -133,7 +134,7 @@ public class Student {
         statement.setInt(1, classNumber);
         ResultSet resultSet = statement.executeQuery();
         while (resultSet.next()) {
-            Student s = new Student(resultSet.getInt("id"),resultSet.getString("first_name"), resultSet.getString("last_name"), resultSet.getString("date_degree"), resultSet.getInt("class_number"));
+            Student s = new Student(resultSet.getInt("id"),resultSet.getString("first_name"), resultSet.getString("last_name"), resultSet.getDate("date_degree"), resultSet.getInt("class_number"));
             result.add(s);
         }
         return result;
