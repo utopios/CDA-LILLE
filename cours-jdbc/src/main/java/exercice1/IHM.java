@@ -53,7 +53,7 @@ public class IHM {
         Student student = new Student(firstName, lastName, dateDegree, classNumber);
         try {
             if(student.save()) {
-                System.out.println("Etudiant ajouté");
+                System.out.println("Etudiant ajouté "+ student.getId());
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());

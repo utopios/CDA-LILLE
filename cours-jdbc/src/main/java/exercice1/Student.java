@@ -2,10 +2,7 @@ package exercice1;
 
 import org.example.util.DataBaseManager;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -80,12 +77,16 @@ public class Student {
     public boolean save() throws SQLException {
         request = "INSERT INTO student (first_name, last_name, date_degree, class_number) values (?,?,?,?)";
         connection = new DataBaseManager().getConnection();
-        statement = connection.prepareStatement(request);
+        statement = connection.prepareStatement(request, Statement.RETURN_GENERATED_KEYS);
         statement.setString(1, getFirstName());
         statement.setString(2, getLastName());
         statement.setString(3, getDateDegree());
         statement.setInt(4, getClassNumber());
         int rowNb =statement.executeUpdate();
+        ResultSet resultSet = statement.getGeneratedKeys();
+        if(resultSet.next()) {
+            setId(resultSet.getInt(1));
+        }
         return rowNb > 0;
     }
 
