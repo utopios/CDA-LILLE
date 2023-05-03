@@ -18,6 +18,7 @@ public class Contact {
     private static PreparedStatement statement;
     private static ResultSet resultSet;
 
+    public Statut statut;
 
 
     public int getId() {
@@ -146,4 +147,8 @@ public class Contact {
                 ", phone='" + phone + '\'' +
                 '}';
     }
+}
+
+enum Statut {
+    s1, s2
 }
