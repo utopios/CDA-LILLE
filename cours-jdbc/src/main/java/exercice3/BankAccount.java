@@ -98,5 +98,13 @@ public class BankAccount extends BaseJDBC {
         return bankAccount;
     }
 
-
+    @Override
+    public String toString() {
+        return "BankAccount{" +
+                "id=" + id +
+                ", customer=" + customer +
+                ", operations=" + operations +
+                ", totalAmount=" + totalAmount +
+                '}';
+    }
 }

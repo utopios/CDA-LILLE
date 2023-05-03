@@ -70,6 +70,16 @@ public class Operation extends BaseJDBC {
        }
        return operations;
     }
+
+    @Override
+    public String toString() {
+        return "Operation{" +
+                "id=" + id +
+                ", amount=" + amount +
+                ", status=" + status +
+                ", accountId=" + accountId +
+                '}';
+    }
 }
 enum OperationStatus {
     DEPOSIT,

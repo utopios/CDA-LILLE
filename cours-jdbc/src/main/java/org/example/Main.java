@@ -1,6 +1,6 @@
 package org.example;
 
-import exercice2.IHM;
+import exercice3.IHM;
 import org.example.util.DataBaseManager;
 
 import java.sql.*;
@@ -56,6 +56,8 @@ public class Main {
         //Correction exercice 1
         //new IHM().start();
         //Correction exercice 2
+        //new IHM().start();
+        //Correction exercice 3
         new IHM().start();
     }
 }

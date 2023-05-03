@@ -81,4 +81,14 @@ public class Customer extends BaseJDBC {
         }
         return customer;
     }
+
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", phone='" + phone + '\'' +
+                '}';
+    }
 }
