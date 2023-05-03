@@ -1,5 +1,10 @@
 package exercice3;
 
+import org.example.util.DataBaseManager;
+
+import java.sql.SQLException;
+import java.sql.Statement;
+
 public class Customer extends BaseJDBC {
     private int id;
     private String firstName;
@@ -45,11 +50,35 @@ public class Customer extends BaseJDBC {
         this.id = id;
     }
 
-    public boolean save(){
-        return false;
+    public boolean save() throws SQLException {
+        request = "INSERT INTO customer (first_name, last_name, phone) values (?,?,?)";
+        connection = new DataBaseManager().getConnection();
+        statement = connection.prepareStatement(request, Statement.RETURN_GENERATED_KEYS);
+        statement.setString(1, getFirstName());
+        statement.setString(2, getLastName());
+        statement.setString(3, getPhone());
+        int nbRow = statement.executeUpdate();
+        resultSet = statement.getGeneratedKeys();
+        if(resultSet.next()) {
+            this.id = resultSet.getInt(1);
+        }
+        return nbRow == 1;
     }
 
-    public static Customer getById(int id) {
-        return null;
+    public static Customer getById(int id) throws SQLException {
+        Customer customer = null;
+        request = "SELECT * FROM customer where id = ?";
+        connection = new DataBaseManager().getConnection();
+        statement = connection.prepareStatement(request);
+        statement.setInt(1, id);
+        resultSet = statement.executeQuery();
+        if(resultSet.next()) {
+            customer = new Customer(resultSet.getInt("id"),
+                    resultSet.getString("first_name"),
+                    resultSet.getString("last_name"),
+                    resultSet.getString("phone")
+                    );
+        }
+        return customer;
     }
 }

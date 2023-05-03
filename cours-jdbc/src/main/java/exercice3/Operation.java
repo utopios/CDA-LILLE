@@ -1,5 +1,10 @@
 package exercice3;
 
+import org.example.util.DataBaseManager;
+
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Operation extends BaseJDBC {
@@ -9,6 +14,10 @@ public class Operation extends BaseJDBC {
     private OperationStatus status;
 
     private int accountId;
+
+    public int getAccountId() {
+        return accountId;
+    }
 
     public int getId() {
         return id;
@@ -33,12 +42,33 @@ public class Operation extends BaseJDBC {
         this.id = id;
     }
 
-    public boolean save() {
-        return false;
+    public boolean save() throws SQLException {
+        request = "INSERT INTO operation (amount, account_id, status) values (?,?,?)";
+        connection = new DataBaseManager().getConnection();
+        statement = connection.prepareStatement(request, Statement.RETURN_GENERATED_KEYS);
+        statement.setDouble(1, getAmount());
+        statement.setInt(2, getAccountId());
+        statement.setInt(3, getStatus().ordinal());
+        int nbRow = statement.executeUpdate();
+        resultSet = statement.getGeneratedKeys();
+        if(resultSet.next()) {
+            this.id = resultSet.getInt(1);
+        }
+        return nbRow == 1;
     }
 
-    public static List<Operation> getAllByAccountId(int accountId) {
-        return null;
+    public static List<Operation> getAllByAccountId(int accountId) throws SQLException {
+       List<Operation> operations = new ArrayList<>();
+       request = "SELECT * FROM operation where account_id = ?";
+       connection = new DataBaseManager().getConnection();
+       statement = connection.prepareStatement(request);
+       statement.setInt(1, accountId);
+       resultSet = statement.executeQuery();
+       while (resultSet.next()) {
+           Operation o = new Operation(resultSet.getInt("id"), resultSet.getDouble("amount"), accountId);
+           operations.add(o);
+       }
+       return operations;
     }
 }
 enum OperationStatus {
