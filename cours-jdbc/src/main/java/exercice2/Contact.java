@@ -11,10 +11,14 @@ public class Contact {
     private String firstName;
     private String lastName;
     private String phone;
+
+    private List<Email> emails;
     private static String request;
     private static Connection connection;
     private static PreparedStatement statement;
     private static ResultSet resultSet;
+
+
 
     public int getId() {
         return id;
@@ -42,6 +46,14 @@ public class Contact {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public List<Email> getEmails() {
+        return emails;
+    }
+
+    public void setEmails(List<Email> emails) {
+        this.emails = emails;
     }
 
     public Contact(String firstName, String lastName, String phone) {

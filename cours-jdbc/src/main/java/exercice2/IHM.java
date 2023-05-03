@@ -50,10 +50,30 @@ public class IHM {
         try {
             if(contact.save()) {
                 System.out.println("Contact ajouté "+ contact.getId());
+                addEmailsAction(contact.getId());
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    private void addEmailsAction(int contactId) {
+        do {
+            System.out.print("Ajouter un email ? (O/N) ");
+            choix = scanner.nextLine();
+            if(choix.equals("O")) {
+                System.out.print("Merci de saisir le mail : ");
+                String mail = scanner.nextLine();
+                Email email = new Email(mail, contactId);
+                try {
+                    if(email.save()) {
+                        System.out.println("Mail ajouté");
+                    }
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }while (!choix.equals("N"));
     }
 
     private void editContactAction() {
@@ -90,6 +110,14 @@ public class IHM {
         try {
             Contact.search(word).forEach(c-> {
                 System.out.println(c);
+                try {
+                    c.setEmails(Email.getEmailsByContactId(c.getId()));
+                    c.getEmails().forEach(e -> {
+                        System.out.println(e);
+                    });
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
             });
         } catch (SQLException e) {
             System.out.println(e.getMessage());
