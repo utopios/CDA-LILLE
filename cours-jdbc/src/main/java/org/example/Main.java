@@ -58,6 +58,7 @@ public class Main {
         //Correction exercice 2
         //new IHM().start();
         //Correction exercice 3
+        //new IHM().start();
         new IHM().start();
     }
 }

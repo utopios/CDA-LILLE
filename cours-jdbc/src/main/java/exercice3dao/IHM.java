@@ -111,11 +111,23 @@ public class IHM {
         scanner.nextLine();
         Operation operation = new Operation(montant, bankAccount.getId());
         try {
-            if(bankAccount.makeDeposit(operation)) {
+            connection = new DataBaseManager().getConnection();
+            accountDAO = new AccountDAO(connection);
+            operationDAO = new OperationDAO(connection);
+            connection.setAutoCommit(false);
+            if(bankAccount.makeDeposit(operation) && operationDAO.save(operation) && accountDAO.update(bankAccount)) {
                 System.out.println("Dépôt Ok");
+                connection.commit();
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+            try {
+                connection.rollback();
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
+        } catch (ExecutionControl.NotImplementedException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -126,11 +138,23 @@ public class IHM {
         scanner.nextLine();
         Operation operation = new Operation(montant*-1, bankAccount.getId());
         try {
-            if(bankAccount.makeWithDrawl(operation)) {
+            connection = new DataBaseManager().getConnection();
+            accountDAO = new AccountDAO(connection);
+            operationDAO = new OperationDAO(connection);
+            connection.setAutoCommit(false);
+            if(bankAccount.makeWithDrawl(operation) && operationDAO.save(operation) && accountDAO.update(bankAccount)) {
                 System.out.println("Retrait Ok");
+                connection.commit();
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+            try {
+                connection.rollback();
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
+        } catch (ExecutionControl.NotImplementedException e) {
+            throw new RuntimeException(e);
         }
     }
     private BankAccount getAccountAction() {
@@ -139,7 +163,9 @@ public class IHM {
         int id = scanner.nextInt();
         scanner.nextLine();
         try {
-            bankAccount = BankAccount.getById(id);
+            connection = new DataBaseManager().getConnection();
+            accountDAO = new AccountDAO(connection);
+            bankAccount = accountDAO.getById(id);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }

@@ -50,7 +50,7 @@ public class BankAccount {
         if(operation.getAmount() > 0) {
             operations.add(operation);
             totalAmount += operation.getAmount();
-
+            return true;
         }
         return false;
     }
@@ -58,6 +58,7 @@ public class BankAccount {
         if(operation.getAmount() < 0 && getTotalAmount() >= operation.getAmount()*-1) {
             operations.add(operation);
             totalAmount += operation.getAmount();
+            return true;
         }
         return false;
     }
