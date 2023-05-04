@@ -1,5 +1,7 @@
 package exercice3dao.dao;
 
+import exercice3.Customer;
+import exercice3.Operation;
 import exercice3dao.model.BankAccount;
 import jdk.jshell.spi.ExecutionControl;
 import org.example.util.DataBaseManager;
@@ -30,8 +32,19 @@ public class AccountDAO extends BaseDAO<BankAccount> {
     }
 
     @Override
-    public BankAccount getById(int id) {
-        return null;
+    public BankAccount getById(int id) throws SQLException {
+        BankAccount bankAccount = null;
+        request = "SELECT * FROM bank_account where id = ?";
+        statement = _connection.prepareStatement(request);
+        statement.setInt(1, id);
+        resultSet = statement.executeQuery();
+        if(resultSet.next()) {
+            bankAccount = new BankAccount(resultSet.getInt("id"),
+                    resultSet.getInt("customer_id"),
+                    resultSet.getDouble("total_amount")
+            );
+        }
+        return bankAccount;
     }
 
     @Override
@@ -40,7 +53,12 @@ public class AccountDAO extends BaseDAO<BankAccount> {
     }
 
     @Override
-    public boolean update(BankAccount element) {
-        return false;
+    public boolean update(BankAccount element) throws SQLException {
+        request = "UPDATE bank_account set total_amount = ? where id = ?";
+        statement = _connection.prepareStatement(request);
+        statement.setDouble(1, element.getTotalAmount());
+        statement.setInt(2, element.getId());
+        int nbRow = statement.executeUpdate();
+        return nbRow == 1;
     }
 }
