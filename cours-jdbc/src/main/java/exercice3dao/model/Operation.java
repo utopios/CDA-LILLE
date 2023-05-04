@@ -23,6 +23,10 @@ public class Operation {
         return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public double getAmount() {
         return amount;
     }
@@ -53,8 +57,4 @@ public class Operation {
                 ", accountId=" + accountId +
                 '}';
     }
-}
-enum OperationStatus {
-    DEPOSIT,
-    WITHDRAWL
 }
