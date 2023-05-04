@@ -1,8 +1,8 @@
-package exercice3;
+package exercice3avectransaction;
 
-import com.mysql.cj.xdevapi.Client;
 import org.example.util.DataBaseManager;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
@@ -44,8 +44,8 @@ public class BankAccount extends BaseJDBC {
 
     public boolean save() throws SQLException {
         request = "INSERT INTO bank_account (total_amount, customer_id) values (?,?)";
-        connection = new DataBaseManager().getConnection();
-        statement = connection.prepareStatement(request, Statement.RETURN_GENERATED_KEYS);
+        _connection = new DataBaseManager().getConnection();
+        statement = _connection.prepareStatement(request, Statement.RETURN_GENERATED_KEYS);
         statement.setDouble(1, getTotalAmount());
         statement.setInt(2, getCustomerId());
         int nbRow = statement.executeUpdate();
@@ -55,36 +55,44 @@ public class BankAccount extends BaseJDBC {
         }
         return nbRow == 1;
     }
-    public boolean update() throws SQLException {
+    public boolean update(Connection connection) throws SQLException {
         request = "UPDATE bank_account set total_amount = ? where id = ?";
-        connection = new DataBaseManager().getConnection();
-        statement = connection.prepareStatement(request);
+        _connection = connection;
+        statement = _connection.prepareStatement(request);
         statement.setDouble(1, getTotalAmount());
         statement.setInt(2, getId());
         int nbRow = statement.executeUpdate();
         return nbRow == 1;
     }
     public boolean makeDeposit(Operation operation) throws SQLException {
-        if(operation.getAmount() > 0 && operation.save()) {
+        Connection connection = new DataBaseManager().getConnection();
+        connection.setAutoCommit(false);
+        if(operation.getAmount() > 0 && operation.save(connection)) {
             operations.add(operation);
             totalAmount += operation.getAmount();
-            return update();
+            boolean res = update(connection);
+            connection.commit();
+            return res;
         }
         return false;
     }
     public boolean makeWithDrawl(Operation operation) throws SQLException {
-        if(operation.getAmount() < 0 && getTotalAmount() >= operation.getAmount()*-1 && operation.save()) {
+        Connection connection = new DataBaseManager().getConnection();
+        connection.setAutoCommit(false);
+        if(operation.getAmount() < 0 && getTotalAmount() >= operation.getAmount()*-1 && operation.save(connection)) {
             operations.add(operation);
             totalAmount += operation.getAmount();
-            return update();
+            boolean res = update(connection);
+            connection.commit();
+            return  res;
         }
         return false;
     }
     public static BankAccount getById(int id) throws SQLException {
         BankAccount bankAccount = null;
         request = "SELECT * FROM bank_account where id = ?";
-        connection = new DataBaseManager().getConnection();
-        statement = connection.prepareStatement(request);
+        _connection = new DataBaseManager().getConnection();
+        statement = _connection.prepareStatement(request);
         statement.setInt(1, id);
         resultSet = statement.executeQuery();
         if(resultSet.next()) {
