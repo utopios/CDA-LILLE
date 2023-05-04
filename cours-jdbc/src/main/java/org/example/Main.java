@@ -1,6 +1,6 @@
 package org.example;
 
-import exercice3.IHM;
+import exercice3avectransaction.IHM;
 import org.example.util.DataBaseManager;
 
 import java.sql.*;
