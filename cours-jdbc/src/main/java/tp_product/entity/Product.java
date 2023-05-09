@@ -4,12 +4,16 @@ public class Product {
 
     private int id;
     private String name;
-    private String qty;
+    private int qty;
     private String description;
     private double price;
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -20,11 +24,11 @@ public class Product {
         this.name = name;
     }
 
-    public String getQty() {
+    public int getQty() {
         return qty;
     }
 
-    public void setQty(String qty) {
+    public void setQty(int qty) {
         this.qty = qty;
     }
 
@@ -44,14 +48,14 @@ public class Product {
         this.price = price;
     }
 
-    public Product(String name, String qty, String description, double price) {
+    public Product(String name, int qty, String description, double price) {
         this.name = name;
         this.qty = qty;
         this.description = description;
         this.price = price;
     }
 
-    public Product(int id, String name, String qty, String description, double price) {
+    public Product(int id, String name, int qty, String description, double price) {
         this(name, qty, description, price);
         this.id = id;
     }
