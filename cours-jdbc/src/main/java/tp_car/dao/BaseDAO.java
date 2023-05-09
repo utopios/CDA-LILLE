@@ -1,5 +1,7 @@
 package tp_car.dao;
 
+import jdk.jshell.spi.ExecutionControl;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,8 +19,8 @@ public abstract class BaseDAO<T> {
     }
 
     public abstract boolean save(T element) throws SQLException;
-    public abstract boolean update(T element) throws SQLException;
-    public abstract boolean delete(T element) throws SQLException;
+    public abstract boolean update(T element) throws SQLException, ExecutionControl.NotImplementedException;
+    public abstract boolean delete(T element) throws SQLException, ExecutionControl.NotImplementedException;
     public abstract T get(int id) throws SQLException;
     public abstract List<T> get() throws SQLException;
 }
