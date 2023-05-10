@@ -98,7 +98,23 @@ public class IHM {
     }
 
     private void createCar() {
-        
+        System.out.print("Merci de saisir le model : ");
+        String model = sc.nextLine();
+        System.out.print("Merci de saisir l'année : ");
+        String year = sc.nextLine();
+        System.out.print("Merci de saisir le prix : ");
+        double price = sc.nextDouble();
+        sc.nextLine();
+        System.out.print("Merci de saisir la puissance : ");
+        int power = sc.nextInt();
+        sc.nextLine();
+        carService = new CarService();
+        if(carService.createCar(model, price, power, year)){
+            System.out.println("Voiture ajoutée");
+        }
+        else {
+            System.out.println("Erreur d'ajout de voiture");
+        }
     }
 
     private void menu() {
