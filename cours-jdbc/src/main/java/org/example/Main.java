@@ -1,7 +1,7 @@
 package org.example;
 
 import org.example.util.DataBaseManager;
-import tp_product.IHM;
+import tp_car.util.IHM;
 
 import java.sql.*;
 import java.util.Scanner;
@@ -58,6 +58,7 @@ public class Main {
         //Correction exercice 2
         //new IHM().start();
         //Correction exercice 3
+        //new IHM().start();
         //new IHM().start();
         //new IHM().start();
         new IHM().start();

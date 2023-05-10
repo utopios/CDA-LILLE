@@ -52,7 +52,7 @@ public class PersonDAO extends BaseDAO<Person> {
     @Override
     public Person get(int id) throws SQLException {
         Person person = null;
-        request = "select * from person where idPerson = ?";
+        request = "select * from person where id = ?";
         statement = _connection.prepareStatement(request);
         statement.setInt(1, id);
         resultSet = statement.executeQuery();

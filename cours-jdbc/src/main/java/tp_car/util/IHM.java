@@ -68,9 +68,27 @@ public class IHM {
     }
 
     private void getAllSales() {
+        saleService = new SaleService();
+        saleService.getSales().forEach(s -> {
+            System.out.println(s);
+        });
     }
 
     private void createSale() {
+        System.out.print("Merci de saisir l'id de la personne : ");
+        int personId = sc.nextInt();
+        sc.nextLine();
+
+        System.out.print("Merci de saisir l'id de la voiture : ");
+        int carId = sc.nextInt();
+        sc.nextLine();
+        saleService = new SaleService();
+        if(saleService.createSale(carId, personId)) {
+            System.out.println("Vente ajoutée");
+        }
+        else {
+            System.out.println("Erreur création");
+        }
     }
 
     private void updatePerson() {
@@ -80,9 +98,26 @@ public class IHM {
     }
 
     private void listPerson() {
+        personService = new PersonService();
+        personService.getAllPersons().forEach(p -> {
+            System.out.println(p);
+        });
     }
 
     private void createPerson() {
+        System.out.print("Merci de saisir le nom : ");
+        String lastName= sc.nextLine();
+        System.out.print("Merci de saisir le prénom : ");
+        String firstName = sc.nextLine();
+        System.out.print("Merci de saisir l'age : ");
+        int age = sc.nextInt();
+        personService = new PersonService();
+        if(personService.createPerson(firstName, lastName, age)) {
+            System.out.println("Personne ajoutée");
+        }
+        else {
+            System.out.println("Erreur de création personne");
+        }
     }
 
     private void updateCar() {
