@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PersonDAO extends BaseDAO<Person> {
-    protected PersonDAO(Connection connection) {
+    public PersonDAO(Connection connection) {
         super(connection);
     }
 
