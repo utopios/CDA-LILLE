@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CarDAO extends BaseDAO<Car>{
-    protected CarDAO(Connection connection) {
+    public CarDAO(Connection connection) {
         super(connection);
     }
 

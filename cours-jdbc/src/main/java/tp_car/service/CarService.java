@@ -1,30 +1,31 @@
 package tp_car.service;
 
 import org.example.util.DataBaseManager;
-import tp_car.dao.PersonDAO;
+import tp_car.dao.CarDAO;
+import tp_car.entity.Car;
 import tp_car.entity.Person;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
-public class PersonService {
-    private PersonDAO personDAO;
+public class CarService {
     private Connection connection;
+    private CarDAO carDAO;
 
-    public PersonService() {
+    public CarService() {
         try {
             connection = new DataBaseManager().getConnection();
-            personDAO = new PersonDAO(connection);
+            carDAO = new CarDAO(connection);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public boolean createPerson(String firstName, String lastName, int age) {
-        Person person = new Person(firstName, lastName, age);
+    public boolean createCar(String model, double price, int power, String year) {
+        Car car = new Car(model,power, price, year);
         try {
-            if(personDAO.save(person)) {
+            if(carDAO.save(car)) {
                 return true;
             }
         } catch (SQLException e) {
@@ -33,9 +34,9 @@ public class PersonService {
         return false;
     }
 
-    public boolean updatePerson(Person person) {
+    public boolean updateCar(Car car) {
         try {
-            if(personDAO.update(person)) {
+            if(carDAO.update(car)) {
                 return true;
             }
         } catch (SQLException e) {
@@ -44,20 +45,20 @@ public class PersonService {
         return false;
     }
 
-    public Person getPerson(int id) {
+    public Car getCar(int id) {
         try {
-            return personDAO.get(id);
+            return carDAO.get(id);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public boolean deletePerson(int id) {
-        Person person = null;
+    public boolean deleteCar(int id) {
+        Car car = null;
         try {
-            person = personDAO.get(id);
-            if(person != null) {
-                return personDAO.delete(person);
+            car = carDAO.get(id);
+            if(car != null) {
+                return carDAO.delete(car);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -65,9 +66,9 @@ public class PersonService {
         return false;
     }
 
-    public List<Person> getAllPersons() {
+    public List<Car> getAllCars() {
         try {
-            return personDAO.get();
+            return carDAO.get();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

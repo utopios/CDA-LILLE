@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SaleDAO extends BaseDAO<Sale>{
-    protected SaleDAO(Connection connection) {
+    public SaleDAO(Connection connection) {
         super(connection);
     }
 
