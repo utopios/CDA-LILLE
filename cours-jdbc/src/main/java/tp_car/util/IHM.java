@@ -86,15 +86,46 @@ public class IHM {
     }
 
     private void updateCar() {
-        
+        System.out.print("Merci de saisir l'id : ");
+        int id = sc.nextInt();
+        sc.nextLine();
+        System.out.print("Merci de saisir le model : ");
+        String model = sc.nextLine();
+        System.out.print("Merci de saisir l'année : ");
+        String year = sc.nextLine();
+        System.out.print("Merci de saisir le prix : ");
+        double price = sc.nextDouble();
+        sc.nextLine();
+        System.out.print("Merci de saisir la puissance : ");
+        int power = sc.nextInt();
+        sc.nextLine();
+        carService = new CarService();
+        if(carService.updateCar(id, model, price, power, year)) {
+            System.out.println("voiture modifiée");
+        }
+        else {
+            System.out.println("Erreur modification");
+        }
     }
 
     private void deleteCar() {
-        
+        System.out.print("Merci de saisir l'id de la voiture : ");
+        int id = sc.nextInt();
+        sc.nextLine();
+        carService = new CarService();
+        if(carService.deleteCar(id)) {
+            System.out.println("voiture supprimée");
+        }
+        else {
+            System.out.println("Erreur suppression");
+        }
     }
 
     private void listCar() {
-        
+        carService = new CarService();
+        carService.getAllCars().forEach(c -> {
+            System.out.println(c);
+        });
     }
 
     private void createCar() {

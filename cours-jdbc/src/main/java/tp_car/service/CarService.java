@@ -34,8 +34,13 @@ public class CarService {
         return false;
     }
 
-    public boolean updateCar(Car car) {
+    public boolean updateCar(int id, String model, double price, int power, String year) {
         try {
+            Car car = getCar(id);
+            car.setModel(model);
+            car.setPrice(price);
+            car.setPrice(power);
+            car.setYear(year);
             if(carDAO.update(car)) {
                 return true;
             }
