@@ -1,7 +1,9 @@
 package org.example.service;
 
 import org.example.config.DataBaseSingleton;
+import org.example.dao.ClientDAO;
 import org.example.dao.TicketDAO;
+import org.example.entity.Evenement;
 import org.example.entity.Ticket;
 
 import java.sql.Connection;
@@ -13,11 +15,13 @@ public class TicketService {
     private Connection connection;
 
     private TicketDAO ticketDAO;
+    private ClientDAO clientDAO;
 
     public TicketService() {
         try {
             connection = DataBaseSingleton.getInstance().getConnection();
             ticketDAO = new TicketDAO(connection);
+            clientDAO = new ClientDAO(connection);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -78,6 +82,15 @@ public class TicketService {
         try {
             return ticketDAO.get();
         } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public List<Evenement> getAllUserEvents(int id){
+
+        try{
+            return clientDAO.getEventsUser(id);
+        }catch(SQLException e){
             throw new RuntimeException(e);
         }
     }

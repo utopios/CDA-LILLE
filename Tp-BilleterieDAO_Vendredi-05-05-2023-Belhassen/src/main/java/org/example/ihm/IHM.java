@@ -45,7 +45,7 @@ public class IHM {
                 case "4" -> buyTicketAction();
                 case "5" -> cancelTicketAction();
                 case "6" -> showAllEventAction();
-                case "7" -> showAllTicketAction();
+                case "7" -> showCustomerTicketAction();
                 case "9" -> System.out.println("Au revoir");
                 default -> System.out.println("Choix non valide");
             }
@@ -486,19 +486,19 @@ public class IHM {
     }
 
     // 7 - Afficher la liste des billes achetés par un client
-    private void showAllTicketAction() {
+    private void showCustomerTicketAction() {
         getAllclientAction();
         System.out.println("Saississez l'id du client");
         int id = scanner.nextInt();
         scanner.nextLine();
         TicketService ticketService = new TicketService();
-        if (ticketService.getAllTickets() != null) {
-            ticketService.getAllTickets().forEach(
+        if (ticketService.getAllUserEvents(id) != null) {
+            ticketService.getAllUserEvents(id).forEach(
                     ticket -> System.out.println(
-                            "Id : " + ticket.getId() +
-                                    " Client ID  : " + ticket.getIdClient() +
-                                    " Evenement : " + ticket.getIdEvenement() +
-                                    " Nb Tickets : " + ticket.getNbTickets()
+                            "Id : " + ticket.getNameEvent() +
+                                    " Client ID  : " + id +
+                                    " Evenement : " + ticket.getNameEvent()
+                                  //  " Nb Tickets : " + ticket.getNbTickets()
                     )
             );
         } else {
