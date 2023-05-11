@@ -10,5 +10,6 @@ public class Main {
         Livre l2 = new Livre.Builder().ISBN("4555").auteur("toto").build();
         System.out.println(l1);
         System.out.println(l2);
+        Personne p = new Personne.PersonneBuilder().nom("toto").prenom("tata").build();
     }
 }
