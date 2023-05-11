@@ -1,5 +1,8 @@
 package org.example;
 
+import designpattern.abstractfactory.Client;
+import designpattern.abstractfactory.ModerneMeubleFactory;
+import designpattern.abstractfactory.VictorienMeubleFactory;
 import org.example.util.DataBaseManager;
 import tp_car.util.IHM;
 
@@ -61,6 +64,10 @@ public class Main {
         //new IHM().start();
         //new IHM().start();
         //new IHM().start();
-        new IHM().start();
+        //new IHM().start();
+        Client client1 = new Client(new ModerneMeubleFactory());
+        client1.asseoir();
+        Client client2 = new Client(new VictorienMeubleFactory());
+        client2.asseoir();
     }
 }
