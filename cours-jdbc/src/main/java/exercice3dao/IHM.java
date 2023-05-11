@@ -10,6 +10,7 @@ import exercice3dao.model.Customer;
 import exercice3dao.model.Operation;
 import jdk.jshell.spi.ExecutionControl;
 import org.example.util.DataBaseManager;
+import org.example.util.DataBaseManagerSingleton;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -138,7 +139,8 @@ public class IHM {
         scanner.nextLine();
         Operation operation = new Operation(montant*-1, bankAccount.getId());
         try {
-            connection = new DataBaseManager().getConnection();
+            //connection = new DataBaseManager().getConnection();
+            connection = DataBaseManagerSingleton.getInstance().getConnection();
             accountDAO = new AccountDAO(connection);
             operationDAO = new OperationDAO(connection);
             connection.setAutoCommit(false);
