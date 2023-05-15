@@ -68,8 +68,6 @@ public class Demo1 {
         }
 
         em.getTransaction().commit();
-        em.close();
-        emf.close();
 
     }
 
