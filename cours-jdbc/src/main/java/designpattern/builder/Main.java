@@ -11,5 +11,7 @@ public class Main {
         System.out.println(l1);
         System.out.println(l2);
         Personne p = new Personne.PersonneBuilder().nom("toto").prenom("tata").build();
+        //Dans un autre package
+        Personne p2 = Personne.builder().nom("toto").prenom("tata").build();
     }
 }
