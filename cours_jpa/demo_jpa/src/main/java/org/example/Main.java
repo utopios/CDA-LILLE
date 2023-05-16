@@ -1,6 +1,7 @@
 package org.example;
 
 import org.example.demo.Demo1;
+import org.example.demo.Demo2;
 
 public class Main {
     public static void main(String[] args) {
@@ -11,6 +12,8 @@ public class Main {
 
       //  Demo1.remove();
 
-        Demo1.createQuery();
+      //  Demo1.createQuery();
+
+        Demo2.main();
     }
 }
