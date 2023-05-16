@@ -10,9 +10,11 @@
         </description>
         <!-- <provider>: Cet élément facultatif spécifie le fournisseur de persistance JPA à utiliser.
       Si cet élément est omis, le fournisseur par défaut configuré dans l'environnement sera utilisé.-->
-
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <!--        Ici spécifier les classes d'entités qui seront gérées par cette unité de persistance-->
         <class>org.example.entity.Person</class>
+        <class>org.example.entity.oneToOne.Adress</class>
+        <class>org.example.entity.oneToOne.House</class>
 
         <properties>
             <!--            Spécifie le nom de la classe du pilote JDBC utilisé pour la connexion à la base de données.-->
@@ -23,6 +25,7 @@
             <property name="javax.persistence.jdbc.user" value="root" />
             <!--            Spécifie le mot de passe utilisé pour se connecter à la base de données.-->
             <property name="javax.persistence.jdbc.password" value="test" />
+            <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
 
         </properties>
 
