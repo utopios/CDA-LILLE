@@ -68,7 +68,7 @@ public class Demo4 {
 
         user.setGroup(group);
         group.getUsers().add(user);
-        
+
 
         em.persist(user);
         em.persist(group);
