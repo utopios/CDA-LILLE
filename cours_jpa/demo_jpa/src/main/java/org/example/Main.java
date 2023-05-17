@@ -20,6 +20,6 @@ public class Main {
 
        // Demo3.main();
 
-        Demo4.main();
+        Demo4.main2();
     }
 }
