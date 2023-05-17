@@ -15,8 +15,7 @@
         <class>org.example.entity.Person</class>
         <class>org.example.entity.oneToOne.Adress</class>
         <class>org.example.entity.oneToOne.House</class>
-        <class>org.example.entity.oneToMany.User</class>
-        <class>org.example.entity.oneToMany.Group</class>
+
 
 
         <properties>
