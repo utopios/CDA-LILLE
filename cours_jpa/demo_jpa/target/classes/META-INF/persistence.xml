@@ -17,6 +17,8 @@
         <class>org.example.entity.oneToOne.House</class>
         <class>org.example.entity.oneToMany.Department</class>
         <class>org.example.entity.oneToMany.Employee</class>
+        <class>org.example.entity.manyToMany.Post</class>
+        <class>org.example.entity.manyToMany.Tag</class>
 
 
 
@@ -24,7 +26,7 @@
             <!--            Spécifie le nom de la classe du pilote JDBC utilisé pour la connexion à la base de données.-->
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
             <!--            Spécifie l'URL de connexion à la base de données.-->
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/jpa_demo2" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/jpa_demo3" />
             <!--            Spécifie le nom d'utilisateur utilisé pour se connecter à la base de données.-->
             <property name="javax.persistence.jdbc.user" value="root" />
             <!--            Spécifie le mot de passe utilisé pour se connecter à la base de données.-->

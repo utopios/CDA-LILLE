@@ -40,6 +40,7 @@ public class TaskDAOImpl implements TaskDAO {
     public boolean addTask(Task task,Long personId){
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
+        transaction.begin();
         Person person = entityManager.find(Person.class,personId);
         task.setPerson(person);
         person.getTasks().add(task);
