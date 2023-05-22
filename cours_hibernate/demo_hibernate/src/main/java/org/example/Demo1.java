@@ -1,5 +1,6 @@
 package org.example;
 
+import org.example.entities.Personne;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
@@ -17,6 +18,31 @@ public class Demo1 {
         Session session = sessionFactory.openSession();
         // Dés l'ouverture de la session, et en fonction de la propriété hibernate.hbm2ddl.auto hibernate va agir sur la base de donnée
 
+        // Ajout d'une personne
+    //    session.getTransaction().begin();
+       /* Personne p = new Personne();
+        p.setNom("toto");
+        p.setPrenom("tata");
+        session.save(p);
+        System.out.println("ID de la personne : " + p.getId());*/
+
+     //   session.getTransaction().commit();
+
+        // Récupérer une personne
+        session.getTransaction().begin();
+        Personne p = session.load(Personne.class,1L);
+        System.out.println(p.getNom());
+
+        // Modification
+        // Attention il est important d'être dans la même transaction si on souhaite modifier ou supprimer
+        // on met à jour avec la methode update
+        p.setPrenom("titi");
+        session.update(p);
+
+        //On supprimme avec la methode delete
+        session.delete(p);
+
+        session.getTransaction().commit();
         //Fermeture de la session et la sessionfactory
         session.close();
         sessionFactory.close();
