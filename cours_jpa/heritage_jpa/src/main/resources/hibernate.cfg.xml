@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+
+        <mapping class="org.example.joined_table.CreditCardPaymentS1"/>
+        <mapping class="org.example.joined_table.PaymentS1"/>
+        <mapping class="org.example.joined_table.PaypalPaymentS1"/>
+        <mapping class="org.example.single_table.CreditCardPaymentS2"/>
+        <mapping class="org.example.single_table.PaymentS2"/>
+        <mapping class="org.example.single_table.PaypalPaymentS2"/>
+        <mapping class="org.example.table_per_classe.CreditCardPaymentS3"/>
+        <mapping class="org.example.table_per_classe.PaymentS3"/>
+        <mapping class="org.example.table_per_classe.PaypalPaymentS3"/>
+
+    </session-factory>
+</hibernate-configuration>
