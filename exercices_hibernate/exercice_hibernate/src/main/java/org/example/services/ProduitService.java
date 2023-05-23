@@ -2,6 +2,10 @@ package org.example.services;
 
 import org.example.entities.Produit;
 import org.example.interfaces.Repository;
+import org.hibernate.query.Query;
+
+import java.util.Date;
+import java.util.List;
 
 public class ProduitService extends BaseService implements Repository<Produit> {
 
@@ -43,5 +47,46 @@ public class ProduitService extends BaseService implements Repository<Produit> {
         produit = (Produit) session.get(Produit.class, id);
         session.close();
         return produit;
+    }
+
+    @Override
+    public List<Produit> findAll() {
+        List<Produit> produitList = null;
+      //  session = sessionFactory.openSession();
+        Query<Produit> produitQuery = session.createQuery("from Produit");
+        produitList = produitQuery.list();
+       // session.close();
+        return produitList;
+    }
+
+    public List<Produit> filterByPrice(double min) throws Exception{
+        if (min >= 0){
+         //   session = sessionFactory.openSession();
+            Query<Produit> produitQuery = session.createQuery("from Produit where prix >= :min");
+            produitQuery.setParameter("min",min);
+         //   session.close();
+            return produitQuery.list();
+        }
+        throw new Exception("erreur valeur");
+    }
+
+    public List<Produit> filterByDate(Date min, Date max) throws Exception{
+        if(min.before(max)){
+         //   session = sessionFactory.openSession();
+            Query<Produit> produitQuery = session.createQuery("from Produit where dateAchat >= :min and dateAchat <= :max ");
+            produitQuery.setParameter("min",min);
+            produitQuery.setParameter("max",max);
+        //    session.close();
+            return produitQuery.list();
+        }
+        throw new Exception("erreur date");
+    }
+
+    public void begin(){
+        session = sessionFactory.openSession();
+    }
+
+    public void end(){
+        session.close();
     }
 }
