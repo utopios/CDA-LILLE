@@ -3,13 +3,16 @@ package org.example;
 import org.example.entities.Produit;
 import org.example.services.ProduitService;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
 
         ProduitService ps = new ProduitService();
+        ps.begin();
 
         // Exercice 1
 
@@ -42,9 +45,9 @@ public class Main {
 */
 
         // Exercice 2
-        ps.begin();
 
-        System.out.println("############################");
+
+       /* System.out.println("############################");
         System.out.println("Afficher tous les produits");
         System.out.println("############################");
         List<Produit> produits = ps.findAll();
@@ -74,7 +77,39 @@ public class Main {
             }
         }catch (Exception e){
             System.out.println(e.getMessage());
+        }*/
+
+        // Exercice 3
+       /* try{
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Merci de saisir la date 1 (dd/MM/yyyy) : ");
+        String s1 = scanner.nextLine();
+        Date date1 = new SimpleDateFormat("dd/MM/yyyy").parse(s1);
+
+        System.out.println("Merci de saisir la date 2 (dd/MM/yyyy) : ");
+        String s2 = scanner.nextLine();
+        Date date2 = new SimpleDateFormat("dd/MM/yyyy").parse(s2);
+
+            List<Produit> produits2 = ps.filterByDate(date1,date2);
+            for (Produit pr: produits2) {
+                System.out.println(pr.getId() + " " + pr.getReference());
+            }
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }*/
+
+        try {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Merci de saisir le stock maximum : ");
+            int max = scanner.nextInt();
+            List<Produit> produitList = ps.filterByStockMax(max);
+            for (Produit pr: produitList) {
+                System.out.println(pr.getId() + " " + pr.getReference());
+            }
+        }catch (Exception e){
+            System.out.println(e.getMessage());
         }
+
 
         ps.end();
 

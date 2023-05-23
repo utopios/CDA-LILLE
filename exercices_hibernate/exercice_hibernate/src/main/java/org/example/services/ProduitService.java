@@ -82,6 +82,19 @@ public class ProduitService extends BaseService implements Repository<Produit> {
         throw new Exception("erreur date");
     }
 
+    public List<Produit> filterByStockMax(int max) throws Exception{
+        if (max >= 0){
+            //   session = sessionFactory.openSession();
+            Query<Produit> produitQuery = session.createQuery("from Produit where stock < :max");
+            produitQuery.setParameter("max",max);
+            //   session.close();
+            return produitQuery.list();
+        }
+        throw new Exception("erreur valeur");
+    }
+
+
+
     public void begin(){
         session = sessionFactory.openSession();
     }
