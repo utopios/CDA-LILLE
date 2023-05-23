@@ -71,6 +71,10 @@ public class Demo3 {
             System.out.println(p.getPrenom());
         }
 
+        //Fermeture de la session et la sessionfactory
+        session.close();
+        sessionFactory.close();
+
 
     }
 

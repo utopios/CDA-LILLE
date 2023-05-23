@@ -51,5 +51,9 @@ public class Demo2 {
         Personne p = personneQuery2.uniqueResult();
         System.out.println(p.getNom());
 
+        //Fermeture de la session et la sessionfactory
+        session.close();
+        sessionFactory.close();
+
     }
 }
