@@ -13,6 +13,18 @@
 </head>
 <body>
     <h1>Liste des produits</h1>
+
+    <div>
+        <form action="produits" method="post">
+            <div><label>Marque</label><input type="text" name="marque" /></div>
+            <div><label>Prix</label><input type="text" name="prix" /></div>
+            <div><label>Reference</label><input type="text" name="reference" /></div>
+            <div><label>Date Achat</label><input type="text" name="dateAchat" /></div>
+            <div><label>Stock</label><input type="text" name="stock" /></div>
+            <div><button type="submit" >Valider</button></div>
+        </form>
+    </div>
+
     <c:forEach items="${produits}" var="produit">
         <div>
             Marque : ${produit.getMarque()}

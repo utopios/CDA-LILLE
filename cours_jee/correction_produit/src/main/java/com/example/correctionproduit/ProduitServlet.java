@@ -21,12 +21,9 @@ public class ProduitServlet extends HttpServlet {
         service = new services.ProduitService();
     }
 
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
-        response.setContentType("text/html");
 
-        PrintWriter out = response.getWriter();
-        out.println("<html><body>");
         if(request.getParameter("marque") != null) {
             String marque = request.getParameter("marque");
             String reference = request.getParameter("reference");
@@ -35,13 +32,13 @@ public class ProduitServlet extends HttpServlet {
             LocalDate dateAchat = LocalDate.parse(request.getParameter("dateAchat"));
             entities.Produit produit = new entities.Produit(marque, reference, Date.from(dateAchat.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()), prix, stock);
             if(service.create(produit)) {
-                out.println("<h1>produit ajouté</h1>");
+                response.sendRedirect("produits");
             }
         }else {
-            out.println("<h1>erreur de données</h1>");
+
         }
 
-        out.println("</body></html>");
+
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
