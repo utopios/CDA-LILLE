@@ -10,8 +10,10 @@
 <html>
 <head>
     <title>Produits</title>
+    <jsp:include page="../includes/head.jsp" />
 </head>
 <body>
+    <jsp:include page="../includes/header.jsp" />
     <h1>Liste des produits</h1>
 
     <div>

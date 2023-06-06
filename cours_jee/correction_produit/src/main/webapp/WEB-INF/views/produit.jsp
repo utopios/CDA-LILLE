@@ -9,8 +9,10 @@
 <html>
 <head>
     <title>Produit ${produit.getId()}</title>
+    <jsp:include page="../includes/head.jsp" />
 </head>
 <body>
+<jsp:include page="../includes/header.jsp" />
 <div>
     Marque : ${produit.getMarque()}
     Réference : ${produit.getReference()}

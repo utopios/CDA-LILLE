@@ -1,5 +1,6 @@
 package com.example.correctionproduit;
 
+import com.example.util.Definition;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -47,11 +48,11 @@ public class ProduitServlet extends HttpServlet {
             int id = Integer.parseInt((request.getParameter("id")));
             entities.Produit produit = service.findById(id);
             request.setAttribute("produit", produit);
-            request.getRequestDispatcher("produit.jsp").forward(request,response);
+            request.getRequestDispatcher(Definition.VIEW_PATH+"produit.jsp").forward(request,response);
         }
         else {
             request.setAttribute("produits", service.findAll());
-            request.getRequestDispatcher("produits.jsp").forward(request,response);
+            request.getRequestDispatcher(Definition.VIEW_PATH+"produits.jsp").forward(request,response);
         }
 
     }
