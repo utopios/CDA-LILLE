@@ -13,6 +13,10 @@
 <body>
 <div>
     <h1>Redirection après request</h1>
+    <div>
+        Nom : ${personne.getNom()}
+        Prénom: ${personne.getPrenom()}
+    </div>
 </div>
 </body>
 </html>

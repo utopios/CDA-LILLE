@@ -1,5 +1,6 @@
 package com.example.demo_cours;
 
+import entity.Personne;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -15,6 +16,8 @@ public class RedirectionServlet extends HttpServlet {
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Personne personne = new Personne("toto", "tata");
+        request.setAttribute("personne", personne);
         request.getRequestDispatcher("redirection.jsp").forward(request, response);
     }
 
