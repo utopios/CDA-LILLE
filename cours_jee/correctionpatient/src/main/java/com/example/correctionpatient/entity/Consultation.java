@@ -17,4 +17,9 @@ public class Consultation {
 
     @ManyToOne
     private Patient patient;
+
+    @OneToOne(mappedBy = "consultation", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private FicheSoins ficheSoins;
+    @OneToOne(mappedBy = "consultation", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Prescription prescription;
 }
