@@ -26,16 +26,26 @@
             <div><button type="submit" >Valider</button></div>
         </form>
     </div>
+    <c:choose>
+        <c:when test="${produits != null}">
 
-    <c:forEach items="${produits}" var="produit">
-        <div>
-            Marque : ${produit.getMarque()}
-            Réference : ${produit.getReference()}
-            Prix : ${produit.getPrix()} €
-            Stock : ${produit.getStock()}
-            Date Achat : ${produit.getDateAchat()}
-            <a href="produits?id=${produit.getId()}">Detail</a>
-        </div>
-    </c:forEach>
+        </c:when>
+        <c:when test="${produits == null}">
+
+        </c:when>
+    </c:choose>
+    <c:if test="${produits != null}">
+        <c:forEach items="${produits}" var="produit">
+            <div>
+                Marque : ${produit.getMarque()}
+                Réference : ${produit.getReference()}
+                Prix : ${produit.getPrix()} €
+                Stock : ${produit.getStock()}
+                Date Achat : ${produit.getDateAchat()}
+                <a href="produits?id=${produit.getId()}">Detail</a>
+            </div>
+        </c:forEach>
+    </c:if>
+
 </body>
 </html>
