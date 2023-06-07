@@ -1,10 +1,7 @@
 package com.example.demo_cours;
 
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.*;
 
 @WebServlet(name = "notprotected", value = "/notprotected")
 public class NotProtectedServlet extends HttpServlet {
@@ -13,9 +10,16 @@ public class NotProtectedServlet extends HttpServlet {
 
     }
 
+    //Pour écrire dans des cookies
+//    public void doGet(HttpServletRequest request, HttpServletResponse response) {
+//        Cookie cookie = new Cookie("isLogged", "true");
+//        cookie.setMaxAge(60*60);
+//        response.addCookie(cookie);
+//    }
+
+    //Pour écrire dans des sessions
     public void doGet(HttpServletRequest request, HttpServletResponse response) {
-        Cookie cookie = new Cookie("isLogged", "true");
-        cookie.setMaxAge(60*60);
-        response.addCookie(cookie);
+        HttpSession session = request.getSession();
+        session.setAttribute("isLogged", true);
     }
 }
