@@ -9,3 +9,4 @@ Le site doit avoir les pages suivantes :
 - Une page détails du patient ou on peut voir le dossier médical avec la liste des consultations, sur cette page on aura un lien qui renvoie vers un formulaire pour créer une consultation.
 - Une page pour afficher le détail de la consultation (prescription, fiches de soins)
 - La page détail de la consultation permet d'envoyer vers les formulaires pour ajouter les prescriptions et fiches de soins
+- Pour créer un patient, il faut être connecté avec un login et mot de passe
