@@ -1,6 +1,8 @@
 package com.example.correctionpatient.repository;
 
 import com.example.correctionpatient.entity.FicheSoins;
+import com.example.correctionpatient.entity.Prescription;
+import org.hibernate.Query;
 import org.hibernate.Session;
 
 import java.util.List;
@@ -10,23 +12,21 @@ public class SoinsRepository extends Repository<FicheSoins> {
         super(session);
     }
 
-    @Override
-    public boolean update(FicheSoins o) {
-        return false;
-    }
 
-    @Override
-    public boolean delete(FicheSoins o) {
-        return false;
-    }
 
     @Override
     public FicheSoins findById(int id) {
-        return null;
+        return _session.get(FicheSoins.class, id);
     }
 
     @Override
     public List<FicheSoins> findAll() {
-        return null;
+       return _session.createQuery("from FicheSoins ").list();
+    }
+
+    public List<FicheSoins> findAllByConsultationId(int consultationId) {
+        Query<FicheSoins> query = _session.createQuery("from FicheSoins  where consultation.id = :id");
+        query.setParameter("id", consultationId);
+        return query.list();
     }
 }
