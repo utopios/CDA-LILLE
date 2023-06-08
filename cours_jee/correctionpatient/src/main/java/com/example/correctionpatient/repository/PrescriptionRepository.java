@@ -11,9 +11,6 @@ public class PrescriptionRepository extends Repository<Prescription> {
     }
 
 
-
-
-
     @Override
     public Prescription findById(int id) {
         return null;
