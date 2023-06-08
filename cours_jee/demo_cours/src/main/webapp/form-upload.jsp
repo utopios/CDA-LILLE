@@ -13,7 +13,7 @@
 <body>
 <form action="" method="post" enctype="multipart/form-data">
     <div>
-        <input type="file" name="image" />
+        <input type="file" name="image" multiple="true" />
     </div>
     <div>
         <button type="submit">Valider</button>

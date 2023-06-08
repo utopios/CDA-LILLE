@@ -29,11 +29,6 @@ public class UploadServlet extends HttpServlet {
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //Le fichier envoyé par le client
-        Part image = request.getPart("image");
-
-        //On peut récupérer, par exemple, le nom du fichier
-        String fileName = image.getSubmittedFileName();
 
         //Le dossier ou sera envoyer le fichier, getServletContext => permet de récupérer le dossier de deploiement des servlet
         String uploadPath =  getServletContext().getRealPath("/") + "images";
@@ -45,9 +40,23 @@ public class UploadServlet extends HttpServlet {
             uploadDir.mkdir();
         }
 
-        //On crée notre fichier dans le dossier upload à partir du fichier récupéré
-        image.write(uploadPath + File.separator + fileName);
+        //Le fichier envoyé par le client
+        //Part image = request.getPart("image");
 
+        //On peut récupérer, par exemple, le nom du fichier
+        //String fileName = image.getSubmittedFileName();
+
+
+
+        //On crée notre fichier dans le dossier upload à partir du fichier récupéré
+        //image.write(uploadPath + File.separator + fileName);
+
+        //SI un envoie multiple
+
+        for(Part part : request.getParts()) {
+            String name = part.getSubmittedFileName();
+            part.write(uploadPath + File.separator + name);
+        }
         request.getRequestDispatcher("form-upload.jsp").forward(request, response);
     }
 }
