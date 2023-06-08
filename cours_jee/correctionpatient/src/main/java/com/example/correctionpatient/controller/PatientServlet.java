@@ -21,11 +21,6 @@ public class PatientServlet extends HttpServlet {
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Patient patient = new Patient();
-        patient.setName("toto");
-        Session session = HibernateSession.getSessionFactory().openSession();
-        session.save(patient);
-        session.close();
         request.getRequestDispatcher(VIEW_PATH + "/patients.jsp").forward(request, response);
     }
 }
