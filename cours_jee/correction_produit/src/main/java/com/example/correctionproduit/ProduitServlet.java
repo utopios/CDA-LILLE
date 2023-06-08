@@ -1,11 +1,15 @@
 package com.example.correctionproduit;
 
+import com.example.entities.Image;
+import com.example.services.UploadService;
 import com.example.util.Definition;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,12 +18,21 @@ import java.time.ZoneId;
 import java.util.Date;
 
 @WebServlet(name = "produits", value = "/produits")
+@MultipartConfig(
+        //taille max d'un fichier
+        maxFileSize = 1024*1024*10,
+        //taille max d'une requete
+        maxRequestSize = 1024*1024*100
+)
 public class ProduitServlet extends HttpServlet {
 
 
     private services.ProduitService service;
+
+    private UploadService uploadService;
     public void init() {
         service = new services.ProduitService();
+        uploadService = new UploadService(getServletContext());
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -32,6 +45,12 @@ public class ProduitServlet extends HttpServlet {
             double prix = Double.parseDouble(request.getParameter("prix"));
             LocalDate dateAchat = LocalDate.parse(request.getParameter("dateAchat"));
             entities.Produit produit = new entities.Produit(marque, reference, Date.from(dateAchat.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()), prix, stock);
+            for(Part part : request.getParts()) {
+                Image image = new Image();
+                image.setUrl(uploadService.Upload(part));
+                image.setProduit(produit);
+                produit.getImages().add(image);
+            }
             if(service.create(produit)) {
                 response.sendRedirect("produits");
             }

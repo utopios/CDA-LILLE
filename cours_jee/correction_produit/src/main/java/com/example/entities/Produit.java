@@ -1,8 +1,12 @@
 package entities;
 
 
+import com.example.entities.Image;
+
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Produit {
@@ -22,10 +26,15 @@ public class Produit {
 
     private int stock;
 
+    @OneToMany(mappedBy = "produit", fetch = FetchType.EAGER)
+    private List<Image> images;
+
     public Produit() {
+        images = new ArrayList<>();
     }
 
     public Produit(String marque, String reference, Date dateAchat, double prix) {
+        this();
         this.marque = marque;
         this.reference = reference;
         this.dateAchat = dateAchat;
@@ -33,6 +42,7 @@ public class Produit {
     }
 
     public Produit(String marque, String reference, Date dateAchat, double prix, int stock) {
+        this();
         this.marque = marque;
         this.reference = reference;
         this.dateAchat = dateAchat;
@@ -86,6 +96,10 @@ public class Produit {
 
     public void setStock(int stock) {
         this.stock = stock;
+    }
+
+    public List<Image> getImages() {
+        return images;
     }
 
     @Override

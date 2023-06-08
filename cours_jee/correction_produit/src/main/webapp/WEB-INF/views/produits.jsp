@@ -17,12 +17,13 @@
     <h1>Liste des produits</h1>
 
     <div>
-        <form action="produits" method="post">
+        <form action="produits" method="post" enctype="multipart/form-data">
             <div><label>Marque</label><input type="text" name="marque" /></div>
             <div><label>Prix</label><input type="text" name="prix" /></div>
             <div><label>Reference</label><input type="text" name="reference" /></div>
             <div><label>Date Achat</label><input type="text" name="dateAchat" /></div>
             <div><label>Stock</label><input type="text" name="stock" /></div>
+            <div><input type="file" name="images" multiple="true"></div>
             <div><button type="submit" >Valider</button></div>
         </form>
     </div>
