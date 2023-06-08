@@ -46,10 +46,14 @@ public class ProduitServlet extends HttpServlet {
             LocalDate dateAchat = LocalDate.parse(request.getParameter("dateAchat"));
             entities.Produit produit = new entities.Produit(marque, reference, Date.from(dateAchat.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()), prix, stock);
             for(Part part : request.getParts()) {
-                Image image = new Image();
-                image.setUrl(uploadService.Upload(part));
-                image.setProduit(produit);
-                produit.getImages().add(image);
+                if(part.getName().equals("images")) {
+                    Image image = new Image();
+                    String url = uploadService.Upload(part);
+                    image.setUrl(url);
+                    image.setProduit(produit);
+                    produit.getImages().add(image);
+                }
+
             }
             if(service.create(produit)) {
                 response.sendRedirect("produits");

@@ -20,8 +20,19 @@ public class UploadService {
     }
 
     public String Upload(Part part) throws IOException {
-        String fileName = part.getSubmittedFileName();
+        String fileName = extractFileName(part);
         part.write(uploadPath + File.separator + fileName);
         return "images/"+fileName;
+    }
+
+    private String extractFileName(Part part) {
+        String contentDisp = part.getHeader("content-disposition");
+        String[] items = contentDisp.split(";");
+        for (String s : items) {
+            if (s.trim().startsWith("filename")) {
+                return s.substring(s.indexOf("=") + 2, s.length()-1);
+            }
+        }
+        return "";
     }
 }

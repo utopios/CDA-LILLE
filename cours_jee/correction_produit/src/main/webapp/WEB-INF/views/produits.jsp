@@ -23,7 +23,7 @@
             <div><label>Reference</label><input type="text" name="reference" /></div>
             <div><label>Date Achat</label><input type="text" name="dateAchat" /></div>
             <div><label>Stock</label><input type="text" name="stock" /></div>
-            <div><input type="file" name="images" multiple="true"></div>
+            <div><input type="file" name="images" multiple="true" /></div>
             <div><button type="submit" >Valider</button></div>
         </form>
     </div>
