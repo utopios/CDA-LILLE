@@ -18,6 +18,7 @@ public class ProduitService extends services.BaseService implements Repository<P
         session = sessionFactory.openSession();
         session.beginTransaction();
         session.save(o);
+        o.getImages().forEach(i-> session.save(i));
         session.getTransaction().commit();
         session.close();
         return true;
