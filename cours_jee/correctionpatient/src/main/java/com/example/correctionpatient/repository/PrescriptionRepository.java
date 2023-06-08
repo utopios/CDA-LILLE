@@ -12,15 +12,7 @@ public class PrescriptionRepository extends Repository<Prescription> {
 
 
 
-    @Override
-    public boolean update(Prescription o) {
-        return false;
-    }
 
-    @Override
-    public boolean delete(Prescription o) {
-        return false;
-    }
 
     @Override
     public Prescription findById(int id) {

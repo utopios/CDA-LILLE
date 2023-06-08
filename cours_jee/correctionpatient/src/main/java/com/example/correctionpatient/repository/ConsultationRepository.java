@@ -12,15 +12,7 @@ public class ConsultationRepository extends Repository<Consultation> {
 
 
 
-    @Override
-    public boolean update(Consultation o) {
-        return false;
-    }
 
-    @Override
-    public boolean delete(Consultation o) {
-        return false;
-    }
 
     @Override
     public Consultation findById(int id) {

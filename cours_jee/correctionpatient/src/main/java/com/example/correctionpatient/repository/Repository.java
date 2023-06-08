@@ -14,9 +14,15 @@ public  abstract class Repository<T> {
         return true;
     }
 
-    abstract boolean update(T o);
+    public boolean update(T o) {
+        _session.update(o);
+        return true;
+    }
 
-    abstract boolean delete(T o);
+    public boolean delete(T o) {
+        _session.delete(o);
+        return true;
+    }
 
     abstract T findById(int id);
 

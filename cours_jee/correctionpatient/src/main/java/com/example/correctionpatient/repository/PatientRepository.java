@@ -12,15 +12,7 @@ public class PatientRepository extends Repository<Patient> {
 
 
 
-    @Override
-    public boolean update(Patient o) {
-        return false;
-    }
 
-    @Override
-    public boolean delete(Patient o) {
-        return false;
-    }
 
     @Override
     public Patient findById(int id) {
