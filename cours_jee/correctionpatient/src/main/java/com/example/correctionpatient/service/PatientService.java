@@ -2,8 +2,11 @@ package com.example.correctionpatient.service;
 
 import com.example.correctionpatient.entity.Patient;
 import com.example.correctionpatient.repository.PatientRepository;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+
+import java.util.List;
 
 public class PatientService {
 
@@ -36,5 +39,36 @@ public class PatientService {
         }
         return result;
     }
-    
+
+    public Patient getByIdPatient (int id){
+        Patient patient = null ;
+        session = _sessionFactory.openSession();
+        patientRepository = new PatientRepository(session);
+        try{
+            patient = patientRepository.findById(id);
+        }catch (Exception e){
+
+        }finally {
+           session.close();
+        }
+        return patient;
+    }
+
+    public List<Patient> getPatients(String name){
+        List<Patient> patients = null;
+        session = _sessionFactory.openSession();
+        patientRepository = new PatientRepository(session);
+        try{
+            if(name == null){
+                patients = patientRepository.findAll();
+            }else{
+                patients = patientRepository.findAllByName(name);
+            }
+        }catch (Exception e){
+
+        }finally {
+            session.close();
+        }
+        return patients;
+    }
 }
