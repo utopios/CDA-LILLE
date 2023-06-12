@@ -35,7 +35,7 @@
     <div>
       id : ${consultation.getId()}
       date : ${consultation.getDateConsultation()}
-      <a href="consultation/?id=${consultation.getId()}">Detail de la consultation</a>
+      <a href="${pageContext.request.contextPath}/consultation?id=${consultation.getId()}">Detail de la consultation</a>
     </div>
   </c:forEach>
 </div>

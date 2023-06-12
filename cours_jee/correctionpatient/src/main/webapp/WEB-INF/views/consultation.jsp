@@ -19,13 +19,13 @@
 </div>
 <div>
   <h2>Fiche soins</h2>
-  <:c:if test="${consultation.getFicheSoins() != null}">
+  <c:if test="${consultation.getFicheSoins() != null}">
     <div>
       ${consultation.getFicheSoins().getContent()}
     </div>
-  </:c:if>
-  <:c:if test="${consultation.getFicheSoins() == null}">
-    <form action="Soins" method="post">
+  </c:if>
+  <c:if test="${consultation.getFicheSoins() == null}">
+    <form action="${pageContext.request.contextPath}/soins" method="post">
       <input type="hidden" name="consultationId" value="${consultation.getId()}">
       <div>
         <label>Contenu</label>
@@ -35,7 +35,7 @@
         <button type="submit">Valider</button>
       </div>
     </form>
-  </:c:if>
+  </c:if>
 </div>
 </body>
 </html>
