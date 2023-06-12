@@ -36,6 +36,25 @@
       </div>
     </form>
   </c:if>
+
+  <h2>Préscription</h2>
+  <c:if test="${consultation.getPrescription() != null}">
+    <div>
+        ${consultation.getPrescription().getContent()}
+    </div>
+  </c:if>
+  <c:if test="${consultation.getPrescription() == null}">
+    <form action="${pageContext.request.contextPath}/prescription" method="post">
+      <input type="hidden" name="consultationId" value="${consultation.getId()}">
+      <div>
+        <label>Contenu</label>
+        <textarea name="content"></textarea>
+      </div>
+      <div>
+        <button type="submit">Valider</button>
+      </div>
+    </form>
+  </c:if>
 </div>
 </body>
 </html>
