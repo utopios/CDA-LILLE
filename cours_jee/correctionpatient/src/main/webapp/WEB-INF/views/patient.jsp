@@ -23,7 +23,7 @@
 <div>
   <div>
     <h2>Ajouter une consultations</h2>
-    <form action="/consultation" method="post">
+    <form action="consultation" method="post">
       <input type="hidden" name="patientId" value="${patient.getId()}">
       <div>
         <button type="submit">Valider</button>
@@ -34,7 +34,7 @@
   <c:forEach items="${patient.getConsultations()}" var="consultation">
     <div>
       id : ${consultation.getId()}
-      date : ${consultation.dateConsultation()}
+      date : ${consultation.getDateConsultation()}
     </div>
   </c:forEach>
 </div>
