@@ -18,6 +18,7 @@
     <c:if test="${messageError != null}">
         <div>${messageError}</div>
     </c:if>
+<c:if test="${isLogged == true}">
     <form  method="post">
         <input type="hidden" name="action" value="search">
         <div>
@@ -28,7 +29,7 @@
             <button type="submit">Valider</button>
         </div>
     </form>
-
+</c:if>
     <form  method="post">
         <input type="hidden" name="action" value="add">
         <div>

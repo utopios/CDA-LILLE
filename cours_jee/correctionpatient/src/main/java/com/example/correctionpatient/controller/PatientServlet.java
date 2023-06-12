@@ -1,6 +1,8 @@
 package com.example.correctionpatient.controller;
 
 import com.example.correctionpatient.entity.Patient;
+import com.example.correctionpatient.service.LoginService;
+import com.example.correctionpatient.service.LoginServiceImpl;
 import com.example.correctionpatient.service.PatientService;
 import com.example.correctionpatient.util.HibernateSession;
 import jakarta.servlet.ServletException;
@@ -18,9 +20,11 @@ import static com.example.correctionpatient.util.Definition.VIEW_PATH;
 @WebServlet(name = "patient", value = "/")
 public class PatientServlet extends HttpServlet {
     private PatientService patientService;
+    private LoginService loginService;
     private List<Patient> patients;
     public void init() {
         patientService = new PatientService(HibernateSession.getSessionFactory());
+
 
     }
 
@@ -53,6 +57,8 @@ public class PatientServlet extends HttpServlet {
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        loginService = new LoginServiceImpl(request.getSession());
+        request.setAttribute("isLogged", loginService.isLogged());
         if(request.getParameter("id") != null && !request.getParameter("id").equals("")) {
             int id = Integer.parseInt(request.getParameter("id"));
             Patient patient = patientService.getByIdPatient(id);
