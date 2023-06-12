@@ -32,7 +32,7 @@ public class PatientServlet extends HttpServlet {
         }
         else {
             patients = patientService.getPatients(null);
-            if(!request.getParameter("name").equals("") && !request.getParameter("phone").equals("")) {
+            if(request.getParameter("name") != null && request.getParameter("phone") != null && !request.getParameter("name").equals("") && !request.getParameter("phone").equals("")) {
                 String name= request.getParameter("name");
                 String phone = request.getParameter("phone");
                 if(patientService.createPatient(name, phone)) {
