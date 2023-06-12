@@ -22,4 +22,8 @@ public class Consultation {
     private FicheSoins ficheSoins;
     @OneToOne(mappedBy = "consultation", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Prescription prescription;
+
+    public Consultation() {
+
+    }
 }

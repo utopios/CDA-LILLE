@@ -27,7 +27,7 @@ public class PatientRepository extends Repository<Patient> {
     }
 
     public List<Patient> findAllByName(String search) {
-        Query<Patient> query = _session.createQuery("from Patient where name like :search");
+        Query<Patient> query = _session.createQuery("from Patient where name like :search or phone like :search");
         query.setParameter("search", search + "%");
         return query.list();
     }
