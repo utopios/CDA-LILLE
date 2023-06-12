@@ -52,6 +52,7 @@
         <div>
             Nom : ${patient.getName()}
             Téléphone : ${patient.getPhone()}
+            <a href="?id=${patient.getId()}">Detail</a>
         </div>
     </c:forEach>
 </div>

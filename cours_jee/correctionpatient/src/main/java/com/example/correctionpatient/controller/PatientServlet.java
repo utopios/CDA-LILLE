@@ -53,8 +53,15 @@ public class PatientServlet extends HttpServlet {
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        patients = patientService.getPatients(null);
-        request.setAttribute("patients", patients);
-        request.getRequestDispatcher(VIEW_PATH + "/patients.jsp").forward(request, response);
-    }
+        if(request.getParameter("id") != null && !request.getParameter("id").equals("")) {
+            int id = Integer.parseInt(request.getParameter("id"));
+            Patient patient = patientService.getByIdPatient(id);
+            request.setAttribute("patient", patient);
+            request.getRequestDispatcher(VIEW_PATH + "/patient.jsp").forward(request, response);
+        }else {
+            patients = patientService.getPatients(null);
+            request.setAttribute("patients", patients);
+            request.getRequestDispatcher(VIEW_PATH + "/patients.jsp").forward(request, response);
+            }
+        }
 }
