@@ -14,7 +14,7 @@ public class ShopTest {
     }
 
     @Test
-    void testUpdateShouldDecreaseQuality() {
+    void testUpdateShouldDecreaseQuality() throws QualityException {
         //Arrange
         product = Product.builder().quality(10).sellIn(10).name("p1").type("c1").build();
         //Act
@@ -24,7 +24,7 @@ public class ShopTest {
     }
 
     @Test
-    void testUpdateShouldDecreaseSellIn() {
+    void testUpdateShouldDecreaseSellIn() throws QualityException {
         //Arrange
         product = Product.builder().quality(10).sellIn(10).name("p1").type("c1").build();
         //Act
@@ -34,7 +34,7 @@ public class ShopTest {
     }
 
     @Test
-    void testUpdateShouldDecreaseQualityTwiceWhenSellInIs0() {
+    void testUpdateShouldDecreaseQualityTwiceWhenSellInIs0() throws QualityException {
         //Arrange
         product = Product.builder().quality(10).sellIn(0).name("p1").type("c1").build();
         //Act
@@ -64,7 +64,7 @@ public class ShopTest {
     }
 
     @Test
-    void testUpdateShouldIncreaseQualityWhewProductIsBrie() {
+    void testUpdateShouldIncreaseQualityWhewProductIsBrie() throws QualityException {
         //Arrange
         product = Product.builder().quality(10).sellIn(10).name("brie vieilli").type("laitier").build();
         //Act
@@ -74,12 +74,22 @@ public class ShopTest {
     }
 
     @Test
-    void testUpdateShouldDecreaseQualityTwiceWhenProductTypeIsLaitier() {
+    void testUpdateShouldDecreaseQualityTwiceWhenProductTypeIsLaitier() throws QualityException {
+        //Arrange
+        product = Product.builder().quality(10).sellIn(10).name("p1").type("laitier").build();
+        //Act
+        shop.update(product);
+
+        Assertions.assertEquals(8, product.getQuality());
+    }
+
+    @Test
+    void testUpdateShouldDecreaseQualityTwiceWhenProductTypeIsLaitierAndSellInIs0() throws QualityException {
         //Arrange
         product = Product.builder().quality(10).sellIn(0).name("p1").type("laitier").build();
         //Act
         shop.update(product);
 
-        Assertions.assertEquals(8, product.getQuality());
+        Assertions.assertEquals(6, product.getQuality());
     }
 }
