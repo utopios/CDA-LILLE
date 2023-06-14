@@ -90,6 +90,23 @@ public class ShopTest {
         //Act
         shop.update(product);
 
-        Assertions.assertEquals(6, product.getQuality());
+        Assertions.assertEquals(6   , product.getQuality());
+    }
+
+    @Test
+    void testUpdateQualityShouldBe0WhenProductIsLaitierAndSellIs0() throws QualityException {
+        //Arrange
+        product = Product.builder().quality(3).sellIn(0).name("p1").type("laitier").build();
+        //Act
+        shop.update(product);
+        Assertions.assertEquals(0   , product.getQuality());
+    }
+    @Test
+    void testUpdateQualityShouldBe0WhenQualityIs2AndSellIs0() throws QualityException {
+        //Arrange
+        product = Product.builder().quality(2).sellIn(0).name("p1").type("c1").build();
+        shop.update(product);
+        //Act
+        Assertions.assertEquals(0   , product.getQuality());
     }
 }
