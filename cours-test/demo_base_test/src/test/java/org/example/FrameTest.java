@@ -37,6 +37,7 @@ public class FrameTest {
     void Roll_SimpleFrame_SecondRoll_CheckScore() throws Exception {
         List<Roll> rolls = new ArrayList<>();
         rolls.add(new Roll(6));
+        frame.setRolls(rolls);
         Mockito.when(frameGenerateur.randomPin(4)).thenReturn(2);
 
         frame.makeRoll();
@@ -48,7 +49,7 @@ public class FrameTest {
     void Roll_SimpleFrame_SecondRoll_FirstRollStrike_ReturnFalse() throws Exception {
         List<Roll> rolls = new ArrayList<>();
         rolls.add(new Roll(10));
-        Mockito.when(frameGenerateur.randomPin(4)).thenReturn(2);
+        frame.setRolls(rolls);
         boolean res = frame.makeRoll();
         Assertions.assertFalse(res);
     }
@@ -58,6 +59,8 @@ public class FrameTest {
         List<Roll> rolls = new ArrayList<>();
         rolls.add(new Roll(6));
         rolls.add(new Roll(3));
+        frame.setRolls(rolls);
+
         boolean res = frame.makeRoll();
         Assertions.assertFalse(res);
     }
@@ -66,7 +69,9 @@ public class FrameTest {
         frame = new Frame(frameGenerateur, true);
         List<Roll> rolls = new ArrayList<>();
         rolls.add(new Roll(10));
-        Mockito.when(frameGenerateur.randomPin(10)).thenReturn(2);
+        frame.setRolls(rolls);
+
+
         boolean res = frame.makeRoll();
         Assertions.assertTrue(res);
     }
@@ -76,6 +81,8 @@ public class FrameTest {
         frame = new Frame(frameGenerateur, true);
         List<Roll> rolls = new ArrayList<>();
         rolls.add(new Roll(10));
+        frame.setRolls(rolls);
+
         Mockito.when(frameGenerateur.randomPin(10)).thenReturn(2);
         frame.makeRoll();
         Assertions.assertEquals(12, frame.getScore());
@@ -87,7 +94,8 @@ public class FrameTest {
         List<Roll> rolls = new ArrayList<>();
         rolls.add(new Roll(10));
         rolls.add(new Roll(6));
-        Mockito.when(frameGenerateur.randomPin(4)).thenReturn(2);
+        frame.setRolls(rolls);
+
         boolean res = frame.makeRoll();
         Assertions.assertTrue(res);
     }
@@ -98,6 +106,7 @@ public class FrameTest {
         List<Roll> rolls = new ArrayList<>();
         rolls.add(new Roll(10));
         rolls.add(new Roll(6));
+        frame.setRolls(rolls);
         Mockito.when(frameGenerateur.randomPin(4)).thenReturn(2);
         frame.makeRoll();
         Assertions.assertEquals(18, frame.getScore());
@@ -108,7 +117,7 @@ public class FrameTest {
         List<Roll> rolls = new ArrayList<>();
         rolls.add(new Roll(4));
         rolls.add(new Roll(6));
-        Mockito.when(frameGenerateur.randomPin(10)).thenReturn(2);
+        frame.setRolls(rolls);
         boolean res = frame.makeRoll();
         Assertions.assertTrue(res);
     }
@@ -119,6 +128,7 @@ public class FrameTest {
         List<Roll> rolls = new ArrayList<>();
         rolls.add(new Roll(4));
         rolls.add(new Roll(6));
+        frame.setRolls(rolls);
         Mockito.when(frameGenerateur.randomPin(10)).thenReturn(8);
         frame.makeRoll();
         Assertions.assertEquals(18, frame.getScore());
@@ -131,7 +141,7 @@ public class FrameTest {
         rolls.add(new Roll(4));
         rolls.add(new Roll(6));
         rolls.add(new Roll(6));
-        Mockito.when(frameGenerateur.randomPin(10)).thenReturn(8);
+        frame.setRolls(rolls);
         boolean res = frame.makeRoll();
         Assertions.assertFalse(res);
     }
