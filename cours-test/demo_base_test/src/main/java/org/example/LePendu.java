@@ -45,6 +45,6 @@ public class LePendu {
     }
 
     public boolean testWin() throws Exception {
-        throw new ExecutionControl.NotImplementedException("Not implemented");
+        return getNbEssai() > 0 && getMasque().equals(motATrouve);
     }
 }

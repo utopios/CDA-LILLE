@@ -114,4 +114,34 @@ public class LePenduTest {
 
         Assertions.assertEquals("v******", pendu.getMasque());
     }
+
+    @Test
+    void testWinShouldBeTrueIfCorrectWord() throws Exception {
+        pendu.setMasque("voitur*");
+        pendu.testChar('e');
+
+        boolean res = pendu.testWin();
+
+        Assertions.assertTrue(res);
+    }
+
+    @Test
+    void testWinShouldBeFalseIfWrongWord() throws Exception {
+        pendu.testChar('e');
+
+        boolean res = pendu.testWin();
+
+        Assertions.assertFalse(res);
+    }
+
+    @Test
+    void testWinShouldBeFalseIfNbEsssai() throws Exception {
+        pendu.setMasque("voitur*");
+        pendu.setNbEssai(0);
+        pendu.testChar('e');
+
+        boolean res = pendu.testWin();
+
+        Assertions.assertFalse(res);
+    }
 }
