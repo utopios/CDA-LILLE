@@ -25,7 +25,23 @@ public class LePendu {
     }
 
     public boolean testChar(char c) throws Exception {
-        throw new ExecutionControl.NotImplementedException("Not implemented");
+       boolean result = false;
+       if(getNbEssai()> 0 && motATrouve.contains(String.valueOf(c))) {
+           String tmpMasque = "";
+           for(int i=0; i < motATrouve.length(); i++) {
+               if(motATrouve.charAt(i) == c) {
+                   tmpMasque += c;
+               }else {
+                   tmpMasque += masque.charAt(i);
+               }
+           }
+           masque = tmpMasque;
+           result = true;
+       }
+       else {
+           nbEssai--;
+       }
+       return result;
     }
 
     public boolean testWin() throws Exception {

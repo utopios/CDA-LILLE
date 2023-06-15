@@ -18,8 +18,10 @@ public class LePenduTest {
     private IGenerateur generateur;
 
     @BeforeEach
-    void setUp() {
+    void setUp() throws Exception {
         pendu = new LePendu();
+        Mockito.when(generateur.generer()).thenReturn("voiture");
+        pendu.genererMasque(generateur);
     }
 
     @Test
@@ -51,5 +53,65 @@ public class LePenduTest {
         Assertions.assertThrowsExactly(WordException.class, () -> {
             pendu.genererMasque(generateur);
         });
+    }
+
+    @Test
+    void testTestChaShouldBeTrueIfCorrectChar() throws Exception {
+
+        boolean res = pendu.testChar('v');
+
+        Assertions.assertTrue(res);
+    }
+
+    @Test
+    void testTestChaShouldBeFalseIfNotCorrectChar() throws Exception {
+
+        boolean res = pendu.testChar('g');
+
+        Assertions.assertFalse(res);
+    }
+
+    @Test
+    void testTestChaShouldNotUpdateNbEssaiIfCorrectChar() throws Exception {
+        int oldNbEssai = pendu.getNbEssai();
+        boolean res = pendu.testChar('v');
+
+        Assertions.assertEquals(oldNbEssai, pendu.getNbEssai());
+    }
+
+    @Test
+    void testTestChaShouldUpdateNbEssaiIfNotCorrectChar() throws Exception {
+        int oldNbEssai = pendu.getNbEssai();
+        boolean res = pendu.testChar('g');
+
+        Assertions.assertEquals(oldNbEssai-1, pendu.getNbEssai());
+    }
+
+    @Test
+    void testTestChaShouldBeFalseIfCorrectCharAndNbEssai0() throws Exception {
+        pendu.setNbEssai(0);
+        boolean res = pendu.testChar('v');
+
+        Assertions.assertFalse(res);
+    }
+
+    @Test
+    void testTestChaShouldUpdateMasqueIfCorrectChar() throws Exception {
+
+        //Act
+        pendu.testChar('v');
+        pendu.testChar('o');
+
+        Assertions.assertEquals("vo*****", pendu.getMasque());
+    }
+
+    @Test
+    void testTestChaShouldNotUpdateMasqueIfNotCorrectChar() throws Exception {
+
+        //Act
+        pendu.testChar('v');
+        pendu.testChar('g');
+
+        Assertions.assertEquals("v******", pendu.getMasque());
     }
 }
