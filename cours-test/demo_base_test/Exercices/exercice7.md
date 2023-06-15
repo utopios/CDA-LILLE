@@ -13,10 +13,13 @@ Les tests pour réaliser la classe Frame du jeu de bowling doivent couvrir les s
 - S’il s’agit d’une série standard (round 1 par exemple)
     - Le premier lancer d’une série doit augmenter le score de la série
     - Le second lancer d’une série doit augmenter le score de cette série
-    - En cas de strike, il ne doit pas être possible de lancer de nouveau au cours de cette même série o En cas de lancers standards, il ne doit pas être possible de lancer plus de 2 fois
+    - En cas de strike, il ne doit pas être possible de lancer de nouveau au cours de cette même série.
+    - En cas de lancers standards, il ne doit pas être possible de lancer plus de 2 fois
 - S’il s’agit d’une série finale (dernier round)
     - En cas de strike, il doit être possible de lancer une nouvelle fois au cours d’une série
-    - En cas de strike puis de lancer, le score est censé augmenter en accord avec le résultat du lancer o En cas de strike puis d’un lancer, il doit être possible de lancer une nouvelle fois
+    - En cas de strike puis de lancer, le score est censé augmenter en accord avec le résultat du lancer.
+    - En cas de strike puis d’un lancer, il doit être possible de lancer une nouvelle fois
     - En cas de strike puis de lancer, le score est censé augmenter en accord avec le résultat
     - En cas de spare, il doit être possible de lancer une nouvelle fois au cours d’une série
-    - En cas de spare puis de lancer, le score est censé augmenter en accord avec le résultat du lancer o En cas de lancers standards, il ne doit pas être possible de lancer plus de 4 fois
+    - En cas de spare puis de lancer, le score est censé augmenter en accord avec le résultat du lancer.
+    - En cas de lancers standards, il ne doit pas être possible de lancer plus de 4 fois
