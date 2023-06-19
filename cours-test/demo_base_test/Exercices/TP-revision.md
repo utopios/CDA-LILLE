@@ -11,7 +11,7 @@ Instructions :
 
 2. Placement des navires
 
-   - Ajoutez une fonctionnalité à votre servlet pour placer les navires sur la grille. Chaque joueur doit pouvoir placer 5 navires sur sa grille. Chaque navire occupe une seule cellule. Créez une JSP pour permettre au joueur de placer ses navires.
+   - Ajoutez une fonctionnalité à votre servlet pour placer les navires sur la grille. Chaque joueur doit pouvoir placer 15 navires sur sa grille. Chaque navire occupe une seule cellule. Créez une JSP pour permettre au joueur de placer ses navires.
 
 3. Tirer sur un navire
 
