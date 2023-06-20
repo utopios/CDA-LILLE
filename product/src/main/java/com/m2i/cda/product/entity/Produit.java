@@ -20,6 +20,7 @@ public class Produit {
     private String reference;
 
     @Temporal(TemporalType.DATE)
+    @Column(name="date_achat")
     private Date dateAchat;
 
     private double prix;
