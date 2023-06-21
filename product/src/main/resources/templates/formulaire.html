@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+  <title>Title</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Features</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Pricing</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled">Disabled</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="container">
+  <form th:action="@{/product/create}" method="post" th:object="${produit}">
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="marque">marque</label>
+        <input type="text" th:field="*{marque}" class="form-control" id="marque" placeholder="ex : Bell">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="reference">Reference</label>
+        <input type="text" class="form-control" id="reference" th:field="*{reference}" placeholder="N°907654">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="dateAchat">Date</label>
+      <input type="date" class="form-control" id="dateAchat" th:field="*{dateAchat}"
+             th:attr="value=${#dates.format(produit.dateAchat, 'yyyy-MM-dd')}">
+    </div>
+    <div class="form-group">
+      <label for="prix">Prix</label>
+      <input type="number" class="form-control" id="prix" th:field="*{prix}"
+             placeholder="Apartment, studio, or floor">
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="stock">Stock</label>
+        <input type="number" class="form-control" id="stock" th:field="*{stock}">
+
+
+        <input type="hidden" th:field="*{id}" class="form-control" id="id" >
+
+
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Validation</button>
+  </form>
+
+</div>
+
+
+</body>
+</html>

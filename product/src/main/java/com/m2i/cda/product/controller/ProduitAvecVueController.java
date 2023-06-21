@@ -19,38 +19,23 @@ public class ProduitAvecVueController {
     @Autowired
     IProduitService produitService;
 
-    @GetMapping("/affiche")
+    @GetMapping("")
     public ModelAndView getProduits() {
         ModelAndView modelAndView = new ModelAndView();
-
-        if(produitService.findAll().isEmpty()){
+        if (produitService.findAll().isEmpty()) {
             modelAndView.setViewName("error");
-        }else{
-            modelAndView.setViewName("produits");
-            modelAndView.addObject("produits",produitService.findAll());
+        } else {
+            modelAndView.setViewName("produit");
+            modelAndView.addObject("produits", produitService.findAll());
         }
         return modelAndView;
     }
+
 
     @GetMapping("/{id}")
     public Produit getProduit(@PathVariable("id") Integer id) {
         return produitService.findById(id);
     }
-
-    @GetMapping("/getproduit")
-    public Produit getProduitByParams(@RequestParam("id") Integer id) {
-        return produitService.findById(id);
-    }
-
-    @DeleteMapping("/delete/{id}")
-    public String deleteProduit(@PathVariable("id") Integer id) {
-        Produit p = produitService.findById(id);
-        if(p != null && produitService.delete(p)) {
-            return "Suppression Ok";
-        }
-        return "Aucun produit avec cet id";
-    }
-
 
     @GetMapping("/search")
     public String searchProductById(@RequestParam("productId") Integer productId, Model model) {
@@ -60,27 +45,21 @@ public class ProduitAvecVueController {
     }
 
 
-    @PostMapping("")
-    public Produit postProduit(@RequestBody Produit produit) {
-        if(produitService.create(produit)) {
-            return produit;
+
+
+    @GetMapping("/delete/{id}")
+    public String deleteProduit(@PathVariable("id") Integer id) {
+        Produit p = produitService.findById(id);
+        if (p != null && produitService.delete(p)) {
+            return "redirect:/product";
         }
-        return null;
+        return "Aucun produit avec cet id";
     }
 
-    @PostMapping("/update/{id}")
-    public Produit updateProduit(@PathVariable("id") Integer id, @RequestBody Produit produit)  {
-        Produit existProduit = produitService.findById(id);
-        if(existProduit != null) {
-            existProduit.setDateAchat(produit.getDateAchat());
-            existProduit.setMarque(produit.getMarque());
-            existProduit.setReference(produit.getReference());
-            existProduit.setStock(produit.getStock());
-            existProduit.setPrix(produit.getPrix());
-            if(produitService.update(existProduit)) {
-                return  existProduit;
-            }
-        }
-        return existProduit;
+
+    @GetMapping("/form")
+    public String afficherFormulaireCreationProduit(Model model) {
+        model.addAttribute("produit", new Produit());
+        return "formulaire";
     }
 }
