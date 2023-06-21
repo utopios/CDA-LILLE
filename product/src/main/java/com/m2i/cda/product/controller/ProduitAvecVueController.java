@@ -62,4 +62,64 @@ public class ProduitAvecVueController {
         model.addAttribute("produit", new Produit());
         return "formulaire";
     }
+
+
+    @PostMapping("/create")
+    public String postProduit(@ModelAttribute Produit produit) {
+
+        System.out.println("produit " + produit);
+        if (produit.getId() == null) {
+            if (produitService.create(produit)) {
+                return "redirect:/product";
+            }
+            return "product/error";
+
+        } else {
+            Produit existProduit = produitService.findById(produit.getId());
+            if (existProduit != null) {
+                existProduit.setDateAchat(produit.getDateAchat());
+                existProduit.setMarque(produit.getMarque());
+                existProduit.setReference(produit.getReference());
+                existProduit.setStock(produit.getStock());
+                existProduit.setPrix(produit.getPrix());
+                if (produitService.update(existProduit)) {
+                    return "redirect:/product";
+                }
+            }
+
+            return "product/error";
+        }
+    }
+
+    @GetMapping("/edit/{id}")
+    public String editStudentForm(@PathVariable Integer id, Model model) {
+        Produit pr = produitService.findById(id);
+        System.out.println("pr " + pr);
+        model.addAttribute("produit", pr);
+
+
+        return "formulaire";
+    }
+
+
+
+    @PostMapping("/update/{id}")
+    public Produit updateProduit(@PathVariable("id") Integer id, @RequestBody Produit produit) {
+        Produit existProduit = produitService.findById(id);
+        if (existProduit != null) {
+            existProduit.setDateAchat(produit.getDateAchat());
+            existProduit.setMarque(produit.getMarque());
+            existProduit.setReference(produit.getReference());
+            existProduit.setStock(produit.getStock());
+            existProduit.setPrix(produit.getPrix());
+            if (produitService.update(existProduit)) {
+                return existProduit;
+            }
+        }
+        return existProduit;
+    }
+
+
+
+
 }
