@@ -6,6 +6,7 @@ import com.m2i.cda.product.entity.Produit;
 import com.m2i.cda.product.service.IProduitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -49,6 +50,15 @@ public class ProduitAvecVueController {
         }
         return "Aucun produit avec cet id";
     }
+
+
+    @GetMapping("/search")
+    public String searchProductById(@RequestParam("productId") Integer productId, Model model) {
+        Produit produit = produitService.findById(productId);
+        model.addAttribute("produit", produit);
+        return "product-details";
+    }
+
 
     @PostMapping("")
     public Produit postProduit(@RequestBody Produit produit) {
