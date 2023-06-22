@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/styles/style.css}">
+</head>
+<body th:class="${color}">
+<form th:action="@{/cookie-color/submit}" method="post">
+  <div>
+    <select name="color">
+      <option value="red">Red</option>
+      <option value="yellow">Yellow</option>
+      <option value="blue">Blue</option>
+    </select>
+  </div>
+  <div>
+    <button>valider</button>
+  </div>
+</form>
+</body>
+</html>
