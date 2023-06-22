@@ -4,6 +4,7 @@ package com.m2i.cda.product.controller;
 
 import com.m2i.cda.product.entity.Produit;
 import com.m2i.cda.product.service.IProduitService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +15,10 @@ import java.util.List;
 @RequestMapping("/produit")
 @ResponseBody
 public class ProduitController {
+
+
+
+
 
     @Autowired
     IProduitService produitService;
