@@ -25,7 +25,7 @@ L'application web doit proposer un minimum de page web :
 
 - Page Inscription et login.
 - Page d'accueil après login, la page d'accueil contient le formulaire de recherche et affichera les résultats de recherche.
-- Page detail de catégorie.
+- Page annonces d'une catégorie.
 - Page des favoris.
 - Page formulaire pour ajouter, modifier catégorie.
 - Page formulaire pour ajouter, modifier annonce.
