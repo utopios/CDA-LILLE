@@ -17,7 +17,8 @@ public class ProduitService implements IProduitService {
     /*@Autowired
     private ServiceHibernate serviceHibernate;*/
 
-    @Autowired
+
+
     private ProduitRepository _produitRepository;
 
     //private Session session;
@@ -27,8 +28,8 @@ public class ProduitService implements IProduitService {
         session = this.serviceHibernate.getSession();
     }*/
 
-    public ProduitService() {
-
+    public ProduitService(ProduitRepository produitRepository) {
+        _produitRepository = produitRepository;
     }
 
     @Override

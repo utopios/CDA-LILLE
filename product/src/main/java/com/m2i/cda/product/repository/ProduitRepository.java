@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public interface ProduitRepository extends CrudRepository<Produit, Integer> {
 
-    public Produit findByReferenceOrMarque(String search);
+    public Produit findByReferenceOrMarque(String reference, String marque);
     public List<Produit> findAllByReferenceLike(String search);
 
     @Query("SELECT Produit from Produit where reference= :search")
