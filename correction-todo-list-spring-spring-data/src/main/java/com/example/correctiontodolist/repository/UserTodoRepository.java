@@ -1,4 +1,4 @@
-package com.example.correctiontodolist.repository.impl;
+package com.example.correctiontodolist.repository;
 
 
 import com.example.correctiontodolist.entity.UserTodo;

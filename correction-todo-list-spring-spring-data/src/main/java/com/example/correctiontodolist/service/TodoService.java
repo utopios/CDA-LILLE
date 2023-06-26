@@ -2,8 +2,8 @@ package com.example.correctiontodolist.service;
 
 import com.example.correctiontodolist.entity.Image;
 import com.example.correctiontodolist.entity.Todo;
-import com.example.correctiontodolist.repository.impl.ImageRepository;
-import com.example.correctiontodolist.repository.impl.TodoRespository;
+import com.example.correctiontodolist.repository.ImageRepository;
+import com.example.correctiontodolist.repository.TodoRespository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;

@@ -1,7 +1,7 @@
 package com.example.correctiontodolist.service;
 
 import com.example.correctiontodolist.entity.UserTodo;
-import com.example.correctiontodolist.repository.impl.UserTodoRepository;
+import com.example.correctiontodolist.repository.UserTodoRepository;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
