@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<tr th:fragment="todos" th:each="todo : ${todos}">
+  <th scope="row" th:text="${todo.getId()}"></th>
+  <td th:text="${todo.getTitle()}"></td>
+  <td th:text="${todo.getDescription()}"></td>
+  <td th:text="${todo.isStatus()}"></td>
+  <td><a th:href="@{/todos-html/detail/{id}(id=${todo.getId()})}">Detail</a></td>
+</tr>
+</body>
+</html>

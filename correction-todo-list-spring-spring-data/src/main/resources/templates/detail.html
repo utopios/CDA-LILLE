@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Detail</title>
+    <th:block th:include="fragments/base.html :: head"/>
+</head>
+<body>
+<header th:replace="fragments/base.html :: header"></header>
+<div th:if="${todo != null}">
+    <h1>detail todo</h1>
+    <div scope="row" th:text="${todo.getId()}"></div>
+    <div th:text="${todo.getTitle()}"></div>
+    <div th:text="${todo.getDescription()}"></div>
+    <div th:text="${todo.isStatus()}"></div>
+    <div>
+        <a th:href="@{/todos-html/update/{id}(id=${todo.getId()})}">Changer status</a>
+    </div>
+    <div>
+        <img th:each="image : ${todo.getImages()}" th:src="@{/{img}(img=${image.getUrl()})}" />
+    </div>
+    <div th:if="${isLogged}">
+        <div th:if="${isUrgent}">
+            <a th:href="@{/urgent/remove/{id}(id=${todo.getId()})}">Supprimer des urgences</a>
+        </div>
+        <div th:if="${!isUrgent}">
+            <a th:href="@{/urgent/add/{id}(id=${todo.getId()})}">Ajouter aux urgences</a>
+        </div>
+    </div>
+
+</div>
+<div th:unless="${todo != null}">
+    <h1>Aucun todo avec cet id</h1>
+</div>
+</body>
+</html>
