@@ -10,6 +10,7 @@ public class EmptyFieldsException extends Exception {
         for(String f : fields) {
             message += f + " ";
         }
+
         return new EmptyFieldsException(message);
     }
 

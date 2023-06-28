@@ -9,4 +9,6 @@ public interface LoginService {
 
     public boolean isAdmin();
 
+    public int getUserId();
+
 }
