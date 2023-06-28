@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign In</title>
+    <th:block th:insert="~{fragments/base.html :: head}"/>
+</head>
+<body>
+    <form class="container" th:action="@{/user/signin}" method="post">
+        <div th:if="${message != null}" class="col-6 justify-content-center m-1">
+            <div class="alert alert-danger">
+                <div th:text="${message}"></div>
+            </div>
+        </div>
+        <div class="col-6 justify-content-center m-1">
+            <input type="text" name="email" placeholder="Votre email" class="form-control p-1">
+        </div>
+        <div class="col-6 justify-content-center m-1">
+            <input type="password" name="password" placeholder="Votre mot de passe" class="form-control p-1">
+        </div>
+        <div class="col-6 justify-content-center m-1">
+            <button class="btn btn-primary p-1">Sign In</button>
+        </div>
+    </form>
+</body>
+</html>
