@@ -1,10 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<head th:replace="~{fragments/base.html :: head}"></head>
 <body>
+<header th:replace="~{fragments/base.html::header}"></header>
+<main class="d-flex flex-column justify-content-center align-items-center">
+    <h2>Formulaire Categorie</h2>
+    <div th:if="${errorMessage != null}" th:text="${errorMessage}" class="text-danger"></div>
+    <form th:action="@{#}" method="post" class="d-flex flex-column align-items-center mt-5" style="width: 50%;">
+        <label for="name">Category Name :</label>
+        <input type="text" name="title" id="name" class="form-control" th:value="${category!=null}? ${category.getTitle()} : ''">
+        <button class="btn btn-info mt-4" style="width: 60%">Send</button>
+    </form>
+</main>
+
 
 </body>
 </html>

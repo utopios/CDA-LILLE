@@ -2,10 +2,7 @@ package com.example.correctionpetiteannonce.service;
 
 import com.example.correctionpetiteannonce.entity.Ad;
 import com.example.correctionpetiteannonce.entity.Category;
-import com.example.correctionpetiteannonce.exception.CategoryExistException;
-import com.example.correctionpetiteannonce.exception.EmptyFieldsException;
-import com.example.correctionpetiteannonce.exception.NotAdminException;
-import com.example.correctionpetiteannonce.exception.NotSignInException;
+import com.example.correctionpetiteannonce.exception.*;
 import com.example.correctionpetiteannonce.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,12 +38,50 @@ public class CategoryService {
         throw new NotSignInException();
     }
 
-    public List<Category> getCategories() {
-        return (List<Category>) categoryRepository.findAll();
+    public boolean updateCategory(int id, String title) throws EmptyFieldsException, NotAdminException, NotSignInException, CategoryNotExistException {
+        if(loginService.isLogged()) {
+            if (loginService.isAdmin()) {
+                if(title != null) {
+                    try {
+                        Category category = categoryRepository.findById(id).get();
+                        category.setTitle(title);
+                        categoryRepository.save(category);
+                        return true;
+                    }catch (Exception ex) {
+                        throw new CategoryNotExistException();
+                    }
+
+                }
+                throw EmptyFieldsException.with("title");
+            }
+            throw new NotAdminException();
+        }
+        throw new NotSignInException();
     }
 
-    public List<Ad> getAdsByCategoryId(int id) {
-        List<Ad> ads = categoryRepository.findById(id).get().getAds();
-        return ads;
+    public List<Category> getCategories() throws NotSignInException {
+        if(loginService.isLogged()) {
+            return (List<Category>) categoryRepository.findAll();
+        }
+        throw new NotSignInException();
+    }
+
+    public Category getCategoryById(int id) throws NotSignInException, CategoryNotExistException {
+        if(loginService.isLogged()) {
+            try {
+                return categoryRepository.findById(id).get();
+            }catch (Exception ex) {
+                throw new CategoryNotExistException();
+            }
+        }
+        throw new NotSignInException();
+    }
+
+    public List<Ad> getAdsByCategoryId(int id) throws NotSignInException {
+        if(loginService.isLogged()) {
+            List<Ad> ads = categoryRepository.findById(id).get().getAds();
+            return ads;
+        }
+        throw new NotSignInException();
     }
 }

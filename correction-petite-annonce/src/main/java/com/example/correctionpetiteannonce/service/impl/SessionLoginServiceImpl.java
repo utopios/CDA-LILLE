@@ -23,12 +23,12 @@ public class SessionLoginServiceImpl implements LoginService {
 
     @Override
     public boolean isLogged() {
-        return (boolean)httpSession.getAttribute("isLogged") == true;
+        return httpSession.getAttribute("isLogged") != null && (boolean)httpSession.getAttribute("isLogged") == true;
     }
 
     @Override
     public boolean isAdmin() {
-        return (boolean)httpSession.getAttribute("isAdmin") == true;
+        return httpSession.getAttribute("isLogged") != null && (boolean)httpSession.getAttribute("isAdmin") == true;
     }
 
     @Override
