@@ -54,4 +54,18 @@ public class AdService {
         }
         throw new NotSignInException();
     }
+
+    public List<Ad> getAds() throws NotSignInException {
+        if(loginService.isLogged()) {
+            return (List<Ad>) adRepository.findAll();
+        }
+        throw new NotSignInException();
+    }
+
+    public List<Ad> searchAds(String search) throws NotSignInException {
+        if(loginService.isLogged()) {
+            return (List<Ad>) adRepository.searchAdsByTitleLikeOrDescriptionLike(search+"%", "%"+search+"%");
+        }
+        throw new NotSignInException();
+    }
 }
