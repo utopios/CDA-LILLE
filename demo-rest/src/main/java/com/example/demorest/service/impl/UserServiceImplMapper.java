@@ -23,13 +23,13 @@ public class UserServiceImplMapper implements UserServiceMapper {
 
 
     @Override
-    public UserCreateDto createUser(UserCreateDto userDto) {
+    public UserReadDto createUser(UserCreateDto userDto) {
 
         User user = dtoUtils.convertToEntity(new User(), userDto);
 
         User user1 = userRepository.save(user);
 
-        return (UserCreateDto) dtoUtils.convertToDto(user1, new UserCreateDto());
+        return (UserReadDto) dtoUtils.convertToDto(user1, new UserReadDto());
     }
 
 

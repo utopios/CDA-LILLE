@@ -3,6 +3,7 @@ package com.example.demorest.controller;
 import com.example.demorest.dto.UserCreateDto;
 import com.example.demorest.dto.UserDto;
 
+import com.example.demorest.dto.UserReadDto;
 import com.example.demorest.service.UserServiceMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,20 +23,21 @@ public class UserControllerMapper {
 
 
 
-  /*  @GetMapping("get/{id}")
+    @GetMapping("get_user_mapper/{id}")
     public ResponseEntity<?> getUserById(@PathVariable("id") Integer id){
 
-        return null;
 
-    }*/
+        return new ResponseEntity<>(userService.readUser(id), HttpStatus.OK);
+
+    }
 
 
 
 
     @PostMapping("created_user_mapper")
-    public ResponseEntity<UserCreateDto> post(@RequestBody UserCreateDto userCreateDto){
+    public ResponseEntity<UserReadDto> post(@RequestBody UserCreateDto userCreateDto){
 
-        return new ResponseEntity<UserCreateDto>(userService.createUser(userCreateDto), HttpStatus.CREATED);
+        return new ResponseEntity<UserReadDto>(userService.createUser(userCreateDto), HttpStatus.CREATED);
 
     }
 
