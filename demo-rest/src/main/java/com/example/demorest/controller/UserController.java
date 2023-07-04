@@ -1,6 +1,7 @@
 package com.example.demorest.controller;
 
 import com.example.demorest.entity.User;
+import com.example.demorest.exception.UserNotFoundException;
 import com.example.demorest.service.UserService;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,11 +24,16 @@ public class UserController {
 
     @GetMapping("get/{id}")
     public ResponseEntity<?> getUserById(@PathVariable("id") Integer id){
+        //User user = userService.getUserById(id).get();
 
         if(!userService.getUserById(id).isPresent()){
-            String message = "Utilisateur n'existe pas";
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(message);
+            throw new UserNotFoundException("id " + id);
         }
+      /*  if(user == null){
+            throw new UserNotFoundException("id " + id);
+
+        }*/
+
         return ResponseEntity.ok(userService.getUserById(id).get());
     }
 
