@@ -48,11 +48,11 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.CONFLICT).body(errorMessage);
         }
 
-        if(user == null || user.getEmail() == null || user.getPassword() == null){
+       /* if(user == null || user.getEmail() == null || user.getPassword() == null){
             String message = "Requete invalide : la mot de passe et l'email sont requis";
             return ResponseEntity.badRequest().body(message);
 
-        }
+        }*/
         userService.createUser(user);
 
         return ResponseEntity.status(HttpStatus.CREATED).body("Utilisateur créé avec succès");
