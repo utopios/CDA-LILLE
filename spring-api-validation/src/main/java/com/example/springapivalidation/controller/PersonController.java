@@ -4,8 +4,8 @@ package com.example.springapivalidation.controller;
 import com.example.springapivalidation.entity.Person;
 import com.example.springapivalidation.service.PersonService;
 
-import javax.validation.Valid;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -20,7 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("api/v1")
 public class PersonController {
 
 
@@ -35,21 +35,7 @@ public class PersonController {
         return ResponseEntity.ok("Person created");
     }
 
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    protected  Map<String, String> handleMethodArgumentNotValid(MethodArgumentNotValidException exception){
 
-        Map<String, String> errors = new HashMap<>();
-
-        exception.getBindingResult().getAllErrors().forEach((error)->{
-                    String fieldName = ((FieldError)error).getField();
-                    String message = error.getDefaultMessage();
-                    errors.put(fieldName,message);
-                }
-        );
-        return errors;
-
-    }
 
 
 }
