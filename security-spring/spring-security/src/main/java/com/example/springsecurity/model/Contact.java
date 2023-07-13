@@ -10,6 +10,7 @@ import java.util.Date;
 @Table(name = "contact_messages")
 public class Contact {
 
+
     @Id
     @Column(name = "contact_id")
     private String contactId;

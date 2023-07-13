@@ -11,7 +11,7 @@ import java.util.Date;
 public class Cards {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO,generator="native")
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name = "card_id")
     private int cardId;
 
